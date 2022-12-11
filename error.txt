@@ -1,0 +1,11 @@
+// login
+https://dev.to/imransefat/firebase-authentication-with-getx-in-flutter-4ik8
+
+// The name 'FirebaseAuthExceptions' isn't a type and can't be used in an on-catch clause error
+https://stackoverflow.com/questions/73452925/the-name-firebaseauthexceptions-isnt-a-type-and-cant-be-used-in-an-on-catch
+
+// getx login example
+https://gist.github.com/eduardoflorence/e49780ab232fa8ad7767bbdbf8389f1e
+
+// medium.com login getx
+https://medium.com/@suatozkaya/flutter-getx-basic-authentication-flow-de3d0313d5ae

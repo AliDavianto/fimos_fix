@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "932368924378",
+    "project_id": "fimos-18d64",
+    "storage_bucket": "fimos-18d64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932368924378:android:8515144521eadb04fbafe3",
+        "android_client_info": {
+          "package_name": "com.example.fimos_fix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932368924378-ejmafngjp3jg5i0mnlum1ao7sqv4nja2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaehjD7RpMjg4lc-4f12MCiEuVsCuNvlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932368924378-ejmafngjp3jg5i0mnlum1ao7sqv4nja2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,16 @@
+// cara ngambil data collection
+https://petercoding.com/firebase/2020/04/04/using-cloud-firestore-in-flutter/#retrieve-subcollection
+https://you.com/search?q=flutter%20firebase%20get%20data%20by%20document%20id
+
+// custom id
+
+https://stackoverflow.com/questions/55328838/flutter-firestore-add-new-document-with-custom-id
+
+// kalendar datetime picker
+https://stackoverflow.com/questions/62528177/how-to-get-flutter-datepicker-value-to-the-textfield
+https://www.fluttercampus.com/guide/39/how-to-show-date-picker-on-textfield-tap-and-get-formatted-date/
+https://stackoverflow.com/questions/58861747/how-do-you-store-the-datetime-value-in-flutter-timepicker
+
+//error Flutter TextField "Changing the content within the the composing region may cause the input"
+https://stackoverflow.com/questions/68075005/flutter-textfield-changing-the-content-within-the-the-composing-region-may-caus
+https://api.flutter.dev/flutter/services/TextInputType-class.html

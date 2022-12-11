@@ -1,0 +1,483 @@
+import 'package:flutter/material.dart';
+import '../styleguide/font_style.dart';
+import '../controller/suplai_control.dart';
+import '../controller/suplaicontroller.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import '../CRUD/crud_auth_login.dart';
+import 'dart:ffi';
+import '../controller/globals.dart';
+//jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
+void main() => runApp(suplai());
+
+
+class suplai extends StatelessWidget {
+
+
+
+  final kuantitas_pakan = TextEditingController();
+  final jenisPakan = TextEditingController();
+  final idPakan = TextEditingController();
+  final TextEditingController tanggalDatang = TextEditingController();
+  final tanggalExp = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final log = Get.put(AuthController());
+  final sc = Get.put(SuplaiController(),permanent: true);
+ 
+
+
+ 
+  @override
+
+
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      
+      title: 'Flutter Demo',
+      theme:  ThemeData(scaffoldBackgroundColor: const Color(0xFFF6F6F6)),
+      home: Scaffold(
+        body : SingleChildScrollView(
+           
+          child: Column(
+            children: <Widget>[
+                SizedBox(
+                height: 12,
+                ),
+//header
+         Container(
+        
+          margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+          width: 324,
+          height: 44,
+          //color for header
+          //color: darkGreen,
+          child: Row(crossAxisAlignment: 
+           CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+
+             Container(
+              width: 44,
+              height: 44,
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: darkGreen,
+              ),
+
+              child: CircleAvatar(
+                
+                    backgroundImage: AssetImage('assets/images/profile_bg.png'),
+                    
+                    )
+                        ),
+               Padding(
+                                          padding: EdgeInsets.only(left: 12,top: 6),
+                                          child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                   MainAxisAlignment.start,
+                                              children: [
+                                                Text("Hai Suryano",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.left,
+                                                    style: Paragraph),
+                                                Padding(
+                                                    padding: EdgeInsets.only(top: 6, bottom: 6),
+                                                    child: Text("id 001",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: regular_small)),
+                                              ]
+                                              )),
+
+                                             
+          SizedBox(width:155 ,),      
+        Container(
+            width: 44,
+            height: 44,
+            child: GestureDetector(
+                        onTap: () { 
+                          log.logout();
+                          },
+                        child: const Icon(Icons.logout),
+                        //Image.asset('assets/images/settings_bg.png'),
+                        
+                      ),
+             
+          ) ,                      
+            ],
+          ),
+         ),
+//body 
+        SizedBox(
+        height: 35,
+        ),       
+
+         Container(
+          width: 332,
+          height: 126,
+          
+
+          child: Row(
+            children: [
+              
+              Container(
+                width: 100,
+                height: 126,
+
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Colors.white,),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child:
+                    Image.asset('assets/images/grass_bg_remove.png'),
+                  ),
+                    
+
+                  SizedBox(
+                  height: 12,
+                  ),
+
+                    Text("Suplai Pakan        Hijaun",style: details_small,textAlign: TextAlign.center,),
+
+                    SizedBox(
+                      height: 8,
+                    ),
+
+                    Text("300kg",
+                    style: details,
+                    textAlign: TextAlign.center,)
+
+                  ],
+                ),
+              ),  
+
+                  SizedBox(
+                  width: 16,
+                  ),       
+
+              Container(
+                width: 100,
+                height: 126,
+
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Colors.white,),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child:
+                    Image.asset('assets/images/konsentrat_bg-removebg-preview.png'),
+                  ),
+
+                  SizedBox(
+                  height: 12,
+                  ),
+
+                    Text("Suplai Pakan Konsentrat",style: details_small,textAlign: TextAlign.center,),
+
+                    SizedBox(
+                      height: 8,
+                    ),
+
+                    Text("${sc.counter}kg",
+                    style: details,
+                    textAlign: TextAlign.center,)
+                  ],
+                ),                
+              ),
+
+                  SizedBox(
+                  width: 16,
+                  ),       
+
+              Container(
+                width: 100,
+                height: 126,
+
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Colors.white,),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  
+                  Container(
+                    
+                    child:
+                    Image.asset('assets/images/kambing_bg-removebg-preview.png',height: 50, width: 50,),
+                  ),
+
+                  SizedBox(
+                  height: 12,
+                  ),
+
+                    Text("Pakan Yang Telah Terkonsumsi",style: details_small,
+                    textAlign: TextAlign.center,
+                    ),
+
+                    SizedBox(
+                      height: 8,
+                    ),
+
+                    Text("300kg",
+                    style: details,
+                    textAlign: TextAlign.center,)
+                  ],
+                ),               
+              ),
+
+            ],
+          ),
+         ),
+
+        SizedBox(
+        height: 42,
+        ),   
+
+        Container(
+          child: Column(
+            children: [
+
+               Container(
+                
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Jenis Pakan",style: label,),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                  height: 40,
+                  width: 315,
+                        child: TextField(
+                    keyboardType: TextInputType.number,      
+                    controller: jenisPakan , 
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      hintText: "contoh : 1 untuk Konsentrat,2 untuk Hijauan",hintStyle:hint ,
+                      
+                    ),
+                  ),
+                      )
+                      
+                    ],
+                  )
+              ),
+               
+               
+               SizedBox(
+                height: 16,
+              ),
+
+                Container(
+                
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Kuantitas Pakan",style: label,),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      SizedBox(
+                  height: 40,
+                  width: 315,
+                        child: TextField(
+                    keyboardType: TextInputType.number,    
+                    controller: kuantitas_pakan, 
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      hintText: "contoh : 200",hintStyle:hint ,
+                      
+                    ),
+                  ),
+                      )
+                      
+                    ],
+                  )
+              ),
+               
+               
+               SizedBox(
+                height: 16,
+              ),
+
+              //  Container(
+                
+              //   child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text("Tanggal Pakan Ditambahkan",style: label,),
+              //         SizedBox(
+              //           height: 8,
+              //         ),
+              //         SizedBox(
+              //     height: 40,
+              //     width: 315,
+              //           child: TextField(
+                  
+              //       controller: tanggalDatang,        
+              //       decoration: InputDecoration(
+              //        // prefixIcon:Icon(Icons.calendar_today),
+              //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      
+              //           hintText: "21-08-2022",hintStyle:hint ,
+                        
+              //       ),
+                    
+              //     //    onTap: () async {
+              //     //     DateTime? pickedDate = await showDatePicker(
+              //     //       context: context, initialDate: DateTime.now(),
+              //     //       firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+              //     //       lastDate: DateTime(2101),
+              //     //     );
+
+              //     //     if(pickedDate != null ){
+              //     //     print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+              //     //     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate); 
+              //     //     print(formattedDate); //formatted date output using intl package =>  2021-03-16
+              //     //       //you can implement different kind of Date Format here according to your requirement
+              //     //     var _tanggalDatang = pickedDate;
+              //     //     //  setState(() {
+              //     //     //    tanggalDatang.text = formattedDate; //set output date to TextField value. 
+              //     //     // });
+              //     // }else{
+              //     //     print("Date is not selected");
+              //     // }
+              //     //    }
+              //     ),
+              //         )
+                      
+              //       ],
+              //     )
+              // ),
+               
+               
+               SizedBox(
+                height: 32,
+              ),
+
+              SizedBox(
+                
+                  width: 315, // <-- Your width
+                  height: 36, // <-- Your height
+                  child: TextButton(
+                      
+                    style: TextButton.styleFrom(
+                    foregroundColor: Color(0xFFFFFFFF),
+                    backgroundColor: Color(0xFF307A59),
+                    textStyle: const TextStyle(fontSize: 20),
+                    shape:  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(10.0)),
+                    
+                  ),
+                  onPressed: () async {
+           
+             int  kuantitasPakan = int.parse(kuantitas_pakan.text);
+              sc.increment(kuantitasPakan);
+             //sc.tambah(kuantitasPakan); 
+  
+            // final sp = kuantitasPakan.obs;
+                    
+            
+            
+            
+             
+              
+            //print(_tanggalDatang);
+              
+              final DateTime now = DateTime.now();
+              final DateFormat formatter = DateFormat('dd-MM-yyyy HH:mm:ss');
+              final String formatted = formatter.format(now);
+              DateTime tanggaltambah =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(formatted);
+           
+              String z = jenisPakan.text;
+              String pakan = z;
+              String konsen = "1";
+              String _jenispakan;
+            String _idpakan;
+                if (pakan == konsen) { 
+                  _idpakan = "1";
+                  _jenispakan = "konsentrart";
+                  
+                } else{
+                  _idpakan = "2";
+                  
+                  _jenispakan = "Hijauan";
+                }
+            
+            var x = _idpakan;
+            var jenis = _jenispakan;
+            var response = await addsuplai.addSuplai (
+                kuantitas : kuantitasPakan ,
+                jenis: jenis,
+                //tanggalExp: tanggalExp.text,
+                tanggalDatang: tanggaltambah,
+                idpakan: x ,
+                
+                
+                );
+                
+                if (response.code != 200) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(response.message.toString()),
+                    );
+                  });
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(response.message.toString()),
+                    );
+                  });
+                        
+                  } 
+    
+                  }, 
+                  
+                  child:  Text('Tambah Suplai Pakan', style: button_t),
+                    ),
+                ),
+
+              
+
+                 
+            ],
+          ),
+        )
+
+  
+
+
+
+
+              
+            ],
+          )
+        )));
+    
+  }
+  
+}
+

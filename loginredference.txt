@@ -1,0 +1,4 @@
+https://flutterawesome.com/flutter-firebase-auth-with-getx/
+https://github.com/Chbilalramzan/flutterfirebaseAuth/blob/master/lib/controllers/auth_controller.dart
+https://github.com/taqi92/flutter_basic_api_calling_using_getx/blob/master/lib/core/controllers/login_controllers.dart
+https://jeffmcmorris.medium.com/getx-flutter-firebase-auth-example-b383c1dd1de2
