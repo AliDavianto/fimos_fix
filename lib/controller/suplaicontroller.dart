@@ -7,9 +7,24 @@ import 'package:get/get.dart';
 //jika error hapus file ini
 class SuplaiController extends GetxController{
   var counter =  0.obs;
-  
-  void increment(x) => counter + x;
-  
+  var hijauan = 0.obs;
+  var used = 0.obs;
+  void increment(x,y) {
+    if (y == "1"){
+        counter + x;
+    } else {
+        hijauan + x;
+    }
+  }
+  void decrement(x,y) {
+    if (y == "1"){
+        counter - x;
+    } else {
+        hijauan - x;
+    }
+    
+    used + x;
+  }
  }
 //  int tambah(String x){
   

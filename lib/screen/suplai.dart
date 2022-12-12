@@ -157,7 +157,7 @@ class suplai extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Text("${sc.hijauan}kg",
                     style: details,
                     textAlign: TextAlign.center,)
 
@@ -237,7 +237,7 @@ class suplai extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Text("${sc.used}kg",
                     style: details,
                     textAlign: TextAlign.center,)
                   ],
@@ -391,7 +391,7 @@ class suplai extends StatelessWidget {
                   onPressed: () async {
            
              int  kuantitasPakan = int.parse(kuantitas_pakan.text);
-              sc.increment(kuantitasPakan);
+             
              //sc.tambah(kuantitasPakan); 
   
             // final sp = kuantitasPakan.obs;
@@ -424,6 +424,7 @@ class suplai extends StatelessWidget {
                 }
             
             var x = _idpakan;
+             sc.increment(kuantitasPakan,x);
             var jenis = _jenispakan;
             var response = await addsuplai.addSuplai (
                 kuantitas : kuantitasPakan ,

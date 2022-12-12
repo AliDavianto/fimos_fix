@@ -18,12 +18,7 @@ class Homepage extends StatelessWidget {
   final log = Get.put(AuthController());
   //final tbh = Get.put(SuplaiController());
   final tbh = Get.put(SuplaiController(),permanent: true);
-  
-  //final spl = suplai().kuantitas_pakan.text;
 
- 
-  
-  //final  kuantitasPakan = int.parse(spl);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -152,7 +147,7 @@ class Homepage extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Text("${tbh.hijauan}kg",
                     style: details,
                     textAlign: TextAlign.center,)
 
@@ -232,7 +227,7 @@ class Homepage extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Text("${tbh.used}kg",
                     style: details,
                     textAlign: TextAlign.center,)
                   ],
@@ -322,13 +317,7 @@ class Homepage extends StatelessWidget {
                                   height: 8,),
                         GestureDetector(
                         onTap: () { 
-                          Navigator.of(context).push(
-                      MaterialPageRoute(
-                      builder: (context) {
-                        return feeding();
-                        },
-                      ),
-                    );
+                          Get.to(() => feeding()); 
                           },
                         child: Text("Beri makan",style: dashboard,)
                         
