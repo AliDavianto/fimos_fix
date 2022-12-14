@@ -218,7 +218,7 @@ class Signup extends StatelessWidget {
                   });
                         
                   } 
-                  signup.signup(_staff_email.text, _staff_password.text);
+                  signup.signup(_staff_email.text, _staff_password.text,_staff_name.text);
                   Get.to(() => login()); 
                   }, 
 

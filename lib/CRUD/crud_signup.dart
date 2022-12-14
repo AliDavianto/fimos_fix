@@ -4,8 +4,7 @@ import '../models/response.dart';
 import '../screen/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// var postID = 1;
-// var postID = postID + 1; 
+//jika error copas ulang daru github
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _Collection = _firestore.collection('staff');
 

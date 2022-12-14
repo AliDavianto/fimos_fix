@@ -11,6 +11,9 @@ import 'home_staff.dart';
 import 'feeding.dart';
 import '../controller/suplaicontroller.dart';
 import 'dart:ffi';
+import 'laporan.dart';
+import 'login.dart';
+import '../controller/report_control.dart';
 
 void main() => runApp(Homepage());
 
@@ -18,12 +21,8 @@ class Homepage extends StatelessWidget {
   final log = Get.put(AuthController());
   //final tbh = Get.put(SuplaiController());
   final tbh = Get.put(SuplaiController(),permanent: true);
-  
-  //final spl = suplai().kuantitas_pakan.text;
+  final rc =Get.put(ReportSuplaiControl(),permanent: true);
 
- 
-  
-  //final  kuantitasPakan = int.parse(spl);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -98,7 +97,7 @@ class Homepage extends StatelessWidget {
             height: 44,
             child: GestureDetector(
                         onTap: () { 
-                          log.logout();
+                              log.logout();
                           },
                         child: const Icon(Icons.logout),
                         //Image.asset('assets/images/settings_bg.png'),
@@ -151,10 +150,12 @@ class Homepage extends StatelessWidget {
                     SizedBox(
                       height: 8,
                     ),
-
-                    Text("300kg",
+                    Obx (() => Text ("${tbh.hijauan}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
+                    // Text("${tbh.hijauan}kg",
+                    // style: details,
+                    // textAlign: TextAlign.center,)
 
                   ],
                 ),
@@ -192,9 +193,9 @@ class Homepage extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("${tbh.counter}kg",
+                    Obx (() => Text ("${tbh.counter}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),                
               ),
@@ -232,9 +233,9 @@ class Homepage extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Obx (() => Text ("${tbh.used}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),               
               ),
@@ -322,13 +323,7 @@ class Homepage extends StatelessWidget {
                                   height: 8,),
                         GestureDetector(
                         onTap: () { 
-                          Navigator.of(context).push(
-                      MaterialPageRoute(
-                      builder: (context) {
-                        return feeding();
-                        },
-                      ),
-                    );
+                          Get.to(() => feeding()); 
                           },
                         child: Text("Beri makan",style: dashboard,)
                         
@@ -357,13 +352,8 @@ class Homepage extends StatelessWidget {
                                   height: 8,),
                                       GestureDetector(
                                       onTap: () { 
-                                  //       Navigator.of(context).push(
-                                  //   MaterialPageRoute(
-                                  //   builder: (context) {
-                                  //     return report();
-                                  //     },
-                                  //   ),
-                                  // );
+                                 Get.to(() => report()); 
+
                                         },
                                       child: Text("Laporan",style: dashboard,)
                                       
@@ -421,13 +411,13 @@ class Homepage extends StatelessWidget {
                                 
                                 children: [
                                   
-                                  Text("Id:411",style: laporan,),
+                                  //Obx (() => Text ("${rc.id_laporan}",style: laporan,)), 
 
                                   SizedBox(
-                                    width: 230,
+                                    width: 230 - 44,
                                   ),
 
-                                  Text("22/8/2022",style: laporan,),
+                                   //Obx (() => Text ("${rc.tgl_laporan.value}",style: laporan,)), 
                                 ],
                               ),
 
@@ -442,17 +432,23 @@ class Homepage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Jenis Pakan : Hijauan ",style: Paragraph,),
+                                  Obx (() => Text ("Id Laporan : ${rc.id_laporan}",style: Paragraph,)), 
+                                   SizedBox(height:12 ,),
+                                  Obx (() => Text ("Tanggal Laporan : ${rc.tgl_laporan.value}",style: Paragraph,)), 
+                                   SizedBox(height:12 ,),
+                                  Obx (() => Text ("Jenis Laporan : ${rc.jenis_laporan.value}",style: Paragraph,)),                                
                                   SizedBox(height:12 ,),
-                                  Text("Jenis Ternak : Kambing  ",style: Paragraph,),
+                                  Obx (() => Text ("Jenis Pakan : ${rc.jenis.value}",style: Paragraph,)),                                
                                   SizedBox(height:12 ,),
-                                  Text("Bulan : Agustus  ",style: Paragraph,),
+                                  Obx (() => Text ("Kuantitas Pakan : ${rc.kuantitas.value}",style: Paragraph,)),        
                                   SizedBox(height:12 ,),
-                                  Text("Kuantitas Ternak : 20  ",style: Paragraph,),
-                                  SizedBox(height:12 ,),
-                                  Text("Konsumsi Pakan : 1220 Kg  ",style: Paragraph,),
-                                  SizedBox(height:12 ,),
-                                  Text("Staff : Suryano  ",style: Paragraph,),
+                                  Obx (() => Text ("ID Pakan : ${rc.id.value}",style: Paragraph,)),        
+                                  // SizedBox(height:12 ,),
+                                  // Text("Kuantitas Ternak : 20  ",style: Paragraph,),
+                                  // SizedBox(height:12 ,),
+                                  // Text("Konsumsi Pakan : 1220 Kg  ",style: Paragraph,),
+                                  // SizedBox(height:12 ,),
+                                  // Text("Staff : Suryano  ",style: Paragraph,),
                                 ],
                               ),
                             )

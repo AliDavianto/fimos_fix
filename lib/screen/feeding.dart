@@ -1,21 +1,44 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
 import '../styleguide/font_style.dart';
-import 'splashscreen.dart';
-import 'signup.dart';
+import '../controller/konsumsi.dart';
+import '../controller/suplaicontroller.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import '../CRUD/crud_auth_login.dart';
 import 'dart:ffi';
+import '../controller/globals.dart';
+import '../controller/report_control.dart';
+  final rc =Get.put(ReportSuplaiControl(),permanent: true);
 
-import 'home_admin.dart';
-//import 'laporan.dart';
+//jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
 void main() => runApp(feeding());
 
+
 class feeding extends StatelessWidget {
+
+
+
+  final kuantitas_pakan = TextEditingController();
+  final jenisPakan = TextEditingController();
+  final idPakan = TextEditingController();
+  final TextEditingController tanggaldiGunakan = TextEditingController();
+  final tanggalExp = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final log = Get.put(AuthController());
+  final sc = Get.put(SuplaiController(),permanent: true);
+ 
+
+
+ 
   @override
+
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      
       title: 'Flutter Demo',
-      theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFFF6F6F6)),
+      theme:  ThemeData(scaffoldBackgroundColor: const Color(0xFFF6F6F6)),
       home: Scaffold(
         body : SingleChildScrollView(
            
@@ -78,15 +101,23 @@ class feeding extends StatelessWidget {
 
                                              
           SizedBox(width:155 ,),      
-          Container(
+        Container(
             width: 44,
             height: 44,
-            child:  Image.asset('assets/images/settings_bg.png'),
-          ) ,                             
+            child: GestureDetector(
+                        onTap: () { 
+                          log.logout();
+                          },
+                        child: const Icon(Icons.logout),
+                        //Image.asset('assets/images/settings_bg.png'),
+                        
+                      ),
+             
+          ) ,                      
             ],
           ),
          ),
-//review elements
+//body 
         SizedBox(
         height: 35,
         ),       
@@ -129,9 +160,12 @@ class feeding extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                  Obx (() => Text ("${sc.hijauan}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
+                    // Text("${sc.hijauan}kg",
+                    // style: details,
+                    // textAlign: TextAlign.center,)
 
                   ],
                 ),
@@ -169,9 +203,9 @@ class feeding extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Obx (() => Text ("${sc.counter}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),                
               ),
@@ -179,7 +213,7 @@ class feeding extends StatelessWidget {
                   SizedBox(
                   width: 16,
                   ),       
-//dashboard
+
               Container(
                 width: 100,
                 height: 126,
@@ -209,28 +243,31 @@ class feeding extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                   Obx (() => Text ("${sc.used}kg",
                     style: details,
-                    textAlign: TextAlign.center,),
-
-                    
+                    textAlign: TextAlign.center)),
                   ],
                 ),               
               ),
-            
 
-            
             ],
           ),
          ),
-        SizedBox(height:42 ,),
+
+        SizedBox(
+        height: 42,
+        ),   
 
         Container(
+          child: Column(
+            children: [
+
+               Container(
                 
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("jenis Pakan",style: label,),
+                      Text("Jenis Pakan",style: label,),
                       SizedBox(
                         height: 8,
                       ),
@@ -238,9 +275,11 @@ class feeding extends StatelessWidget {
                   height: 40,
                   width: 315,
                         child: TextField(
-                        
+                    keyboardType: TextInputType.number,      
+                    controller: jenisPakan , 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      hintText: "contoh : 1 untuk Konsentrat,2 untuk Hijauan",hintStyle:hint ,
                       
                     ),
                   ),
@@ -249,10 +288,13 @@ class feeding extends StatelessWidget {
                     ],
                   )
               ),
+               
+               
+               SizedBox(
+                height: 16,
+              ),
 
-         SizedBox(height:16 ,),
-
-         Container(
+                Container(
                 
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,9 +307,11 @@ class feeding extends StatelessWidget {
                   height: 40,
                   width: 315,
                         child: TextField(
-                        
+                    keyboardType: TextInputType.number,    
+                    controller: kuantitas_pakan, 
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      hintText: "contoh : 200",hintStyle:hint ,
                       
                     ),
                   ),
@@ -276,68 +320,132 @@ class feeding extends StatelessWidget {
                     ],
                   )
               ),
-
-             SizedBox(height:16 ,),
-
-        Container(
-                
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Tanggal Pakan Digunakan",style: label,),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      SizedBox(
-                  height: 40,
-                  width: 315,
-                        child: TextField(
-                        
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
-                      
-                    ),
-                  ),
-                      )
-                      
-                    ],
-                  )
+               
+               
+               SizedBox(
+                height: 16,
               ),
 
-            SizedBox(height:32 ,),
+       
+               
+               SizedBox(
+                height: 32,
+              ),
 
-            SizedBox(
+              SizedBox(
                 
                   width: 315, // <-- Your width
-                  height: 41, // <-- Your height
+                  height: 36, // <-- Your height
                   child: TextButton(
                       
                     style: TextButton.styleFrom(
                     foregroundColor: Color(0xFFFFFFFF),
                     backgroundColor: Color(0xFF307A59),
                     textStyle: const TextStyle(fontSize: 20),
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
+                    shape:  RoundedRectangleBorder(borderRadius:  BorderRadius.circular(10.0)),
                     
                   ),
-                  onPressed: () {
-                                        Navigator.of(context).pop(
-                      MaterialPageRoute(
-                      builder: (context) {
-                        return Homepage();
-                        },
-                      ),
-                    );  
-                  },
+                  onPressed: () async {
+           
+             int  kuantitasPakan = int.parse(kuantitas_pakan.text);
+             var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;  
+             //sc.tambah(kuantitasPakan); 
+  
+            // final sp = kuantitasPakan.obs;
+                    
+            
+            
+            
+             
+              
+            //print(_tanggalDatang);
+              
+              final DateTime now = DateTime.now();
+              final DateFormat formatter = DateFormat('dd-MM-yyyy HH:mm:ss');
+              final String formatted = formatter.format(now);
+              DateTime tanggaltambah =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(formatted);
+           
+           //Date time laporan
+             //Datetime Report
+              final DateTime nowL = DateTime.now();
+              final DateFormat formatterL = DateFormat('dd-MM-yyyy HH:mm:ss');         
+              final String laporan = formatterL.format(nowL);
+              DateTime tanggaltambahLaporan =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(laporan);
+              var tgl  = tanggaltambahLaporan.toString();
+              
+              String z = jenisPakan.text;
+              String pakan = z;
+              String konsen = "1";
+              String _jenispakan;
+            String _idpakan;
+                if (pakan == konsen) { 
+                  _idpakan = "1";
+                  _jenispakan = "konsentrart";
                   
-                  child:  Text('Beri Makan', style: button_t),
+                } else{
+                  _idpakan = "2";
+                  
+                  _jenispakan = "Hijauan";
+                }
+            
+            var x = _idpakan;
+            sc.decrement(kuantitasPakan,x);
+            var jenis = _jenispakan;
+            rc.reportPemakaian(kuantitasPakanR,x,tgl);
+
+            var response = await UseSuplai.useSuplai (
+                kuantitas : kuantitasPakan ,
+                jenis: jenis,
+                //tanggalExp: tanggalExp.text,
+                tanggaldiGunakan: tanggaltambah,
+                idpakan: x ,
+                
+                
+                );
+                
+                if (response.code != 200) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(response.message.toString()),
+                    );
+                  });
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(response.message.toString()),
+                    );
+                  });
+                        
+                  } 
+    
+                  }, 
+                  
+                  child:  Text('Gunakan Suplai Pakan', style: button_t),
                     ),
                 ),
+
+              
+
+                 
+            ],
+          ),
+        )
+
+  
+
+
+
+
               
             ],
           )
-          
         )));
-    ;
+    
   }
+  
 }
 
