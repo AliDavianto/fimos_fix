@@ -4,11 +4,13 @@ import '../styleguide/font_style.dart';
 import 'splashscreen.dart';
 import '../CRUD/crud_auth_login.dart';
 import 'package:get/get.dart';
+import '../controller/suplaicontroller.dart';
 
 void main() => runApp(home_staff());
 
 class home_staff extends StatelessWidget {
   final log = Get.put(AuthController());
+  final tbh = Get.put(SuplaiController(),permanent: true);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -134,9 +136,9 @@ class home_staff extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Obx (() => Text ("${tbh.hijauan}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
 
                   ],
                 ),
@@ -174,9 +176,9 @@ class home_staff extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                    Obx (() => Text ("${tbh.counter}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),                
               ),
@@ -214,9 +216,9 @@ class home_staff extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("300kg",
+                   Obx (() => Text ("${tbh.used}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),               
               ),
@@ -348,27 +350,7 @@ class home_staff extends StatelessWidget {
           
         children: [
         SizedBox(height: 32,),
-                  SizedBox(
-                
-                  width: 315, // <-- Your width
-                  height: 41, // <-- Your height
-                  child: TextButton(
-                      
-                    style: TextButton.styleFrom(
-                    foregroundColor: Color(0xFFFFFFFF),
-                    backgroundColor: Color(0xFF307A59),
-                    textStyle: const TextStyle(fontSize: 20),
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
-                    
-                  ),
-                  onPressed: (){log.logout();
-                 
-                  },
                   
-                  
-                  child:  Text('keluar', style: button_t),
-                    ),
-                ),
                   
         ],
         ),)
@@ -381,4 +363,3 @@ class home_staff extends StatelessWidget {
     ;
   }
 }
-

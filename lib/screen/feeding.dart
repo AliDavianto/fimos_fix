@@ -7,6 +7,9 @@ import 'package:get/get.dart';
 import '../CRUD/crud_auth_login.dart';
 import 'dart:ffi';
 import '../controller/globals.dart';
+import '../controller/report_control.dart';
+  final rc =Get.put(ReportSuplaiControl(),permanent: true);
+
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
 void main() => runApp(feeding());
 
@@ -157,9 +160,12 @@ class feeding extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("${sc.hijauan}kg",
+                  Obx (() => Text ("${sc.hijauan}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
+                    // Text("${sc.hijauan}kg",
+                    // style: details,
+                    // textAlign: TextAlign.center,)
 
                   ],
                 ),
@@ -197,9 +203,9 @@ class feeding extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("${sc.counter}kg",
+                    Obx (() => Text ("${sc.counter}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),                
               ),
@@ -237,9 +243,9 @@ class feeding extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Text("${sc.used}kg",
+                   Obx (() => Text ("${sc.used}kg",
                     style: details,
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center)),
                   ],
                 ),               
               ),
@@ -342,7 +348,7 @@ class feeding extends StatelessWidget {
                   onPressed: () async {
            
              int  kuantitasPakan = int.parse(kuantitas_pakan.text);
-              
+             var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;  
              //sc.tambah(kuantitasPakan); 
   
             // final sp = kuantitasPakan.obs;
@@ -359,6 +365,14 @@ class feeding extends StatelessWidget {
               final String formatted = formatter.format(now);
               DateTime tanggaltambah =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(formatted);
            
+           //Date time laporan
+             //Datetime Report
+              final DateTime nowL = DateTime.now();
+              final DateFormat formatterL = DateFormat('dd-MM-yyyy HH:mm:ss');         
+              final String laporan = formatterL.format(nowL);
+              DateTime tanggaltambahLaporan =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(laporan);
+              var tgl  = tanggaltambahLaporan.toString();
+              
               String z = jenisPakan.text;
               String pakan = z;
               String konsen = "1";
@@ -377,6 +391,8 @@ class feeding extends StatelessWidget {
             var x = _idpakan;
             sc.decrement(kuantitasPakan,x);
             var jenis = _jenispakan;
+            rc.reportPemakaian(kuantitasPakanR,x,tgl);
+
             var response = await UseSuplai.useSuplai (
                 kuantitas : kuantitasPakan ,
                 jenis: jenis,

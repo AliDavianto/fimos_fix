@@ -11,8 +11,6 @@ import '../screen/home_staff.dart';
 import '../models/datacollection.dart';
 import '../models/response.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _Collection = _firestore.collection('staff');
 
 AuthController authController = AuthController.instance;
 final Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp();
@@ -26,8 +24,7 @@ class AuthController extends GetxController {
 
   
   void loginstaff(String email, String password) async {
-          DocumentReference documentReferencer =
-        _Collection.doc();
+          
  try { 
   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
     
@@ -42,32 +39,22 @@ class AuthController extends GetxController {
     print('Wrong password provided for that user.');
   } 
   
-   FirebaseAuth.instance
-  .idTokenChanges()
-  .listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      Get.to(() => home_staff()); 
-      print('User is signed in!');
-      print(AsyncSnapshot);
-    }
-  });
-//   final user = FirebaseAuth.instance.currentUser;
-// if (user != null) {
-//     // Name, email address, and profile photo URL
-//     final name = user.displayName;
-//     final email = user.email;
-//     final photoUrl = user.photoURL;
+  //  FirebaseAuth.instance
+  // .idTokenChanges()
+  // .listen((User? user) {
+  //   if (user == null) {
+  //     print('User is currently signed out!');
+  //   } else {
+  //     Get.to(() => home_staff()); 
+  //     print('User is signed in!');
+  //     print(AsyncSnapshot);
+  //   }
+    
+       
+   
+    
+  // });
 
-//     // Check if user's email is verified
-//     final emailVerified = user.emailVerified;
-
-//     // The user's ID, unique to the Firebase project. Do NOT use this value to
-//     // authenticate with your backend server, if you have one. Use
-//     // User.getIdToken() instead.
-//     final uid = user.uid;
-// }
 }
 
 
@@ -76,19 +63,29 @@ class AuthController extends GetxController {
 void logout() async{
   final user = FirebaseAuth.instance.currentUser;
   await FirebaseAuth.instance.signOut();
-  
-  if (user == null){
-    Get.to(() => login());
-  }
+   Get.to(() => login());
+
+FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User ini masuk !');
+      Get.to(() => home_staff()); 
+    }
+  });
   
 }
 
-void signup(String email, String password) async{
+void signup(String email, String password, String displayName) async{
+  
   await FirebaseAuth.instance.signOut();
   try {
   final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: email,
     password: password,
+   
   );
 } on FirebaseAuthException catch (e) {
 
@@ -105,5 +102,11 @@ void signup(String email, String password) async{
 
 } 
 }
+
+
 }
 
+// class UserControl extends GetxController{
+//   final user = FirebaseAuth.instance.currentUser;
+
+// }

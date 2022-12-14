@@ -1,0 +1,3 @@
+//jika login error login dengan akun yang ada lalu jika stuck di notifiying login dengan admin lalu logout
+// cara kedua gunakan tombol logout lalu coba satu satu email yang terdafatar di firebase karena selain email yang sudah terlogin email
+yang lain tidak bisa masuk ke homepage harus di logout dahulu
