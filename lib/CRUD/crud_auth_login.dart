@@ -79,14 +79,19 @@ FirebaseAuth.instance
 }
 
 void signup(String email, String password, String displayName) async{
-  
-  await FirebaseAuth.instance.signOut();
+  //final user = FirebaseAuth.instance.currentUser;
+  //await FirebaseAuth.instance.signOut();
+   
+
   try {
   final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
     email: email,
     password: password,
+    );
    
-  );
+await credential.user?.updateDisplayName(displayName);
+
+
 } on FirebaseAuthException catch (e) {
 
  if (e.code == 'weak-password') {
@@ -106,7 +111,28 @@ void signup(String email, String password, String displayName) async{
 
 }
 
-// class UserControl extends GetxController{
-//   final user = FirebaseAuth.instance.currentUser;
+class UserControl extends GetxController{
+  final user = FirebaseAuth.instance.currentUser;
+  
+  var usersekarang = "null".obs ;
 
-// }
+  void checkuser (){
+    if (user != null) {
+    
+    // Name, email address, and profile photo URL
+    final name = user?.displayName;
+    //usersekarang.value = name;
+    // final email = user?.email;
+    // final photoUrl = user?.photoURL;
+
+    // // Check if user's email is verified
+    // final emailVerified = user?.emailVerified;
+
+    // // The user's ID, unique to the Firebase project. Do NOT use this value to
+    // // authenticate with your backend server, if you have one. Use
+    // // User.getIdToken() instead.
+    // final uid = user?.uid;
+}
+  }
+ 
+}

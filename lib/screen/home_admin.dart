@@ -9,6 +9,7 @@ import 'splashscreen.dart';
 import 'signup.dart';
 import 'home_staff.dart';
 import 'feeding.dart';
+import 'feeding_admin.dart';
 import '../controller/suplaicontroller.dart';
 import 'dart:ffi';
 import 'laporan.dart';
@@ -323,7 +324,7 @@ class Homepage extends StatelessWidget {
                                   height: 8,),
                         GestureDetector(
                         onTap: () { 
-                          Get.to(() => feeding()); 
+                          Get.to(() => feedingadmin()); 
                           },
                         child: Text("Beri makan",style: dashboard,)
                         

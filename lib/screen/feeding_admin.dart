@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styleguide/font_style.dart';
-import '../controller/suplai_control.dart';
+import '../controller/konsumsi.dart';
 import '../controller/suplaicontroller.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
@@ -10,25 +10,27 @@ import '../controller/globals.dart';
 import '../controller/report_control.dart';
 import '../CRUD/report_crud.dart';
 
+  final rc =Get.put(ReportSuplaiControl(),permanent: true);
+
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
-void main() => runApp(suplai());
+void main() => runApp(feedingadmin());
 
 
-class suplai extends StatelessWidget {
+class feedingadmin extends StatelessWidget {
 
 
-
+  final nt= Get.put(addLaporan());
   final kuantitas_pakan = TextEditingController();
   final jenisPakan = TextEditingController();
   final idPakan = TextEditingController();
-  final TextEditingController tanggalDatang = TextEditingController();
+  final TextEditingController tanggaldiGunakan = TextEditingController();
   final tanggalExp = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final log = Get.put(AuthController());
   final sc = Get.put(SuplaiController(),permanent: true);
-  final rc =Get.put(ReportSuplaiControl(),permanent: true);
-  final nt= Get.put(addLaporan());
-   // var xs = 0;
+ 
+
+
  
   @override
 
@@ -159,7 +161,8 @@ class suplai extends StatelessWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    Obx (() => Text ("${sc.hijauan}kg",
+
+                  Obx (() => Text ("${sc.hijauan}kg",
                     style: details,
                     textAlign: TextAlign.center)),
                     // Text("${sc.hijauan}kg",
@@ -242,7 +245,7 @@ class suplai extends StatelessWidget {
                       height: 8,
                     ),
 
-                       Obx (() => Text ("${sc.used}kg",
+                   Obx (() => Text ("${sc.used}kg",
                     style: details,
                     textAlign: TextAlign.center)),
                   ],
@@ -325,56 +328,7 @@ class suplai extends StatelessWidget {
                 height: 16,
               ),
 
-              //  Container(
-                
-              //   child: Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Text("Tanggal Pakan Ditambahkan",style: label,),
-              //         SizedBox(
-              //           height: 8,
-              //         ),
-              //         SizedBox(
-              //     height: 40,
-              //     width: 315,
-              //           child: TextField(
-                  
-              //       controller: tanggalDatang,        
-              //       decoration: InputDecoration(
-              //        // prefixIcon:Icon(Icons.calendar_today),
-              //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
-                      
-              //           hintText: "21-08-2022",hintStyle:hint ,
-                        
-              //       ),
-                    
-              //     //    onTap: () async {
-              //     //     DateTime? pickedDate = await showDatePicker(
-              //     //       context: context, initialDate: DateTime.now(),
-              //     //       firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-              //     //       lastDate: DateTime(2101),
-              //     //     );
-
-              //     //     if(pickedDate != null ){
-              //     //     print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-              //     //     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate); 
-              //     //     print(formattedDate); //formatted date output using intl package =>  2021-03-16
-              //     //       //you can implement different kind of Date Format here according to your requirement
-              //     //     var _tanggalDatang = pickedDate;
-              //     //     //  setState(() {
-              //     //     //    tanggalDatang.text = formattedDate; //set output date to TextField value. 
-              //     //     // });
-              //     // }else{
-              //     //     print("Date is not selected");
-              //     // }
-              //     //    }
-              //     ),
-              //         )
-                      
-              //       ],
-              //     )
-              // ),
-               
+       
                
                SizedBox(
                 height: 32,
@@ -396,7 +350,7 @@ class suplai extends StatelessWidget {
                   onPressed: () async {
            
              int  kuantitasPakan = int.parse(kuantitas_pakan.text);
-             var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;
+             var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;  
              //sc.tambah(kuantitasPakan); 
   
             // final sp = kuantitasPakan.obs;
@@ -410,25 +364,22 @@ class suplai extends StatelessWidget {
               
               final DateTime now = DateTime.now();
               final DateFormat formatter = DateFormat('dd-MM-yyyy HH:mm:ss');
-              final String formatted = formatter.format(now);          
+              final String formatted = formatter.format(now);
               DateTime tanggaltambah =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(formatted);
-              
-
-              //Datetime Report
+           
+           //Date time laporan
+             //Datetime Report
               final DateTime nowL = DateTime.now();
               final DateFormat formatterL = DateFormat('dd-MM-yyyy HH:mm:ss');         
               final String laporan = formatterL.format(nowL);
               DateTime tanggaltambahLaporan =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(laporan);
               var tgl  = tanggaltambahLaporan.toString();
               
-              
-
-
               String z = jenisPakan.text;
               String pakan = z;
               String konsen = "1";
               String _jenispakan;
-            String _idpakan;   
+            String _idpakan;
                 if (pakan == konsen) { 
                   _idpakan = "1";
                   _jenispakan = "konsentrart";
@@ -440,15 +391,16 @@ class suplai extends StatelessWidget {
                 }
             
             var x = _idpakan;
-            var zx = rc.id_laporan.value.obs;  
+            sc.decrement(kuantitasPakan,x);
             var jenis = _jenispakan;
-             sc.increment(kuantitasPakan,x);
-            rc.reportSuplai(kuantitasPakanR,x,tgl,zx);
-            var response = await addsuplai.addSuplai (
+             var zx = rc.id_laporan.value.obs;  
+            rc.reportPemakaian(kuantitasPakanR,x,tgl,zx);
+
+            var response = await UseSuplai.useSuplai (
                 kuantitas : kuantitasPakan ,
                 jenis: jenis,
                 //tanggalExp: tanggalExp.text,
-                tanggalDatang: tanggaltambah,
+                tanggaldiGunakan: tanggaltambah,
                 idpakan: x ,
                 
                 
@@ -472,47 +424,15 @@ class suplai extends StatelessWidget {
                   });
                         
                   } 
-                //membuat laporan
-              
-            
-            var zs = "Penambahan Suplai";
+        var zs = "Pemakaian Pakan";
             nt.addreport(kuantitasPakan, jenis, zs, tanggaltambah, x);
-           //     var xz = xs + 1;
-              
-            //     var responseL = await addLaporan.addlaporan (
-            //     kuantitasL : kuantitasPakan,
-            //     jenis: jenis,
-            //     jenisLaporan : zs,
-            //     idLaporan : xz,
-            //     tanggalDatang: tanggaltambah,
-            //     idpakan: x ,
-            //     );
-
-            //       if (responseL.code != 200) {
-            //   showDialog(
-            //       context: context,
-            //       builder: (context) {
-            //         return AlertDialog(
-            //           content: Text(responseL.message.toString()),
-            //         );
-            //       });
-            // } else {
-            //   showDialog(
-            //       context: context,
-            //       builder: (context) {
-            //         return AlertDialog(
-            //           content: Text(responseL.message.toString()),
-            //         );
-            //       });
-                        
-            //       } 
                   }, 
                   
-                  child:  Text('Tambah Suplai Pakan', style: button_t),
+                  child:  Text('Gunakan Suplai Pakan', style: button_t),
                     ),
                 ),
 
-  
+              
 
                  
             ],

@@ -8,6 +8,10 @@ import '../CRUD/crud_auth_login.dart';
 import 'dart:ffi';
 import '../controller/globals.dart';
 import '../controller/report_control.dart';
+import '../CRUD/report_crud.dart';
+import 'suplai.dart';
+import '../CRUD/report_crud.dart';
+
   final rc =Get.put(ReportSuplaiControl(),permanent: true);
 
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
@@ -16,8 +20,10 @@ void main() => runApp(feeding());
 
 class feeding extends StatelessWidget {
 
+  final nt= Get.put(addLaporan());
 
-
+  final uc = Get.put(UserControl());
+   final lc = Get.put(suplai());
   final kuantitas_pakan = TextEditingController();
   final jenisPakan = TextEditingController();
   final idPakan = TextEditingController();
@@ -26,7 +32,7 @@ class feeding extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final log = Get.put(AuthController());
   final sc = Get.put(SuplaiController(),permanent: true);
- 
+  
 
 
  
@@ -83,7 +89,7 @@ class feeding extends StatelessWidget {
                                               mainAxisAlignment:
                                                    MainAxisAlignment.start,
                                               children: [
-                                                Text("Hai Suryano",
+                                                   Text("Hai ${uc.user?.displayName}",
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
@@ -391,7 +397,8 @@ class feeding extends StatelessWidget {
             var x = _idpakan;
             sc.decrement(kuantitasPakan,x);
             var jenis = _jenispakan;
-            rc.reportPemakaian(kuantitasPakanR,x,tgl);
+            var zx = rc.id_laporan.value.obs;  
+            rc.reportPemakaian(kuantitasPakanR,x,tgl,zx);
 
             var response = await UseSuplai.useSuplai (
                 kuantitas : kuantitasPakan ,
@@ -421,7 +428,10 @@ class feeding extends StatelessWidget {
                   });
                         
                   } 
-    
+             
+
+             var zs = "Pemakaian Pakan";
+            nt.addreport(kuantitasPakan, jenis, zs, tanggaltambah, x);
                   }, 
                   
                   child:  Text('Gunakan Suplai Pakan', style: button_t),

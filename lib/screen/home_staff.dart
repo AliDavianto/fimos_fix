@@ -5,12 +5,14 @@ import 'splashscreen.dart';
 import '../CRUD/crud_auth_login.dart';
 import 'package:get/get.dart';
 import '../controller/suplaicontroller.dart';
+import 'feeding.dart';
 
 void main() => runApp(home_staff());
 
 class home_staff extends StatelessWidget {
   final log = Get.put(AuthController());
   final tbh = Get.put(SuplaiController(),permanent: true);
+  final uc = Get.put(UserControl());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,11 +62,26 @@ class home_staff extends StatelessWidget {
                                               mainAxisAlignment:
                                                    MainAxisAlignment.start,
                                               children: [
-                                                Text("Hai Suryano",
+                                                
+
+                                                 Text("Hai ${uc.user?.displayName}",
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     textAlign: TextAlign.left,
                                                     style: Paragraph),
+                                                    
+                                                 //Obx (() => Text("Hai ${uc.user?.displayName}",
+                                                    // overflow:
+                                                    //     TextOverflow.ellipsis,
+                                                    // textAlign: TextAlign.left,
+                                                    // style: Paragraph),), 
+
+ 
+                                                // Text("Hai Suryano",
+                                                //     overflow:
+                                                //         TextOverflow.ellipsis,
+                                                //     textAlign: TextAlign.left,
+                                                //     style: Paragraph),
                                                 Padding(
                                                     padding: EdgeInsets.only(top: 6, bottom: 6),
                                                     child: Text("id 001",
@@ -307,7 +324,7 @@ class home_staff extends StatelessWidget {
                                   height: 8,),
                         GestureDetector(
                         onTap: () { 
-                          
+                          Get.to(() => feeding()); 
                           },
                         child: Text("Beri makan",style: dashboard,)
                         
