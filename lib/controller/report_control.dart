@@ -43,13 +43,7 @@ class ReportSuplaiControl extends GetxController{
 
     void reportSuplai(x,y,z,s) {
 
-  // firebaseFirestore
-  // .collection('laporan')
-  // .where("jenis_laporan", isEqualTo: "Pemakaian Pakan")
-  // .snapshots()
-  // .listen((data) =>
-  //   data."documents".forEach((doc) => print(doc["title"])));
-    
+
     if (y == "1"){
         var  kuantitasPakan = x.toString();
 

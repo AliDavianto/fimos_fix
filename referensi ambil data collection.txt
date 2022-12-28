@@ -21,3 +21,8 @@ menggunakan if bergantung pada jenis laporan jika jenis laporan atau laporan ber
 incremet  id_laporan + 1 dan sebaliknya
 Cara kedua :
 dengan menggunakan if id_laporanreport atau id_laporansuplai = id_laporan
+
+//firebase storage buat profilepicture
+https://www.youtube.com/watch?v=sM-WMcX66FI&ab_channel=MaxonFlutter
+https://www.youtube.com/watch?v=0mLICZlWb2k&ab_channel=Bytx
+https://github.com/Bytx-youtube/profilepicflutter/blob/main/profilescreen2.dart

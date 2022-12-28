@@ -6,6 +6,7 @@ import '../CRUD/crud_auth_login.dart';
 import 'package:get/get.dart';
 import '../controller/suplaicontroller.dart';
 import 'feeding.dart';
+import 'editProfile.dart';
 
 void main() => runApp(home_staff());
 
@@ -13,6 +14,11 @@ class home_staff extends StatelessWidget {
   final log = Get.put(AuthController());
   final tbh = Get.put(SuplaiController(),permanent: true);
   final uc = Get.put(UserControl());
+   final  List<String> data= [
+      "Edit Profile",
+      "Logout",
+      
+     ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,8 +55,7 @@ class home_staff extends StatelessWidget {
 
               child: CircleAvatar(
                 
-                    backgroundImage: AssetImage('assets/images/profile_bg.png'),
-                    
+                   backgroundImage: NetworkImage("${uc.user?.photoURL}")
                     )
                         ),
                Padding(
@@ -94,19 +99,31 @@ class home_staff extends StatelessWidget {
                                               )),
 
                                               
-          SizedBox(width:155 ,),      
-          Container(
-            width: 44,
-            height: 44,
-            child:   GestureDetector(
-                        onTap: () { 
-                          log.logout();
-                          },
-                        child: const Icon(Icons.logout),
-                        //Image.asset('assets/images/settings_bg.png'),
-                        
-                      ),
-          ) ,                             
+          SizedBox(width:100 ,),     
+
+          DropdownButtonHideUnderline(
+          child:   DropdownButton(
+            icon: Icon(
+                  Icons.settings,
+                  color: black,
+                  size: 30,
+                ),
+                                   
+           onChanged: (value){
+          print(value);
+          if (value == "Logout"){
+            log.logout();
+          } else {
+            Get.to(() => editProfile()); 
+          }
+          },
+                                    
+          items: data.map((e) => DropdownMenuItem(
+         value : e,
+          child: Text(e),
+          )).toList(),
+           ),
+          ),                           
             ],
           ),
          ),
