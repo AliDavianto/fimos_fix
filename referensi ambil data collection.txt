@@ -14,3 +14,15 @@ https://stackoverflow.com/questions/58861747/how-do-you-store-the-datetime-value
 //error Flutter TextField "Changing the content within the the composing region may cause the input"
 https://stackoverflow.com/questions/68075005/flutter-textfield-changing-the-content-within-the-the-composing-region-may-caus
 https://api.flutter.dev/flutter/services/TextInputType-class.html
+
+
+//ide bug id id_laporan
+menggunakan if bergantung pada jenis laporan jika jenis laporan atau laporan berasal dari suplai akan 
+incremet  id_laporan + 1 dan sebaliknya
+Cara kedua :
+dengan menggunakan if id_laporanreport atau id_laporansuplai = id_laporan
+
+//firebase storage buat profilepicture
+https://www.youtube.com/watch?v=sM-WMcX66FI&ab_channel=MaxonFlutter
+https://www.youtube.com/watch?v=0mLICZlWb2k&ab_channel=Bytx
+https://github.com/Bytx-youtube/profilepicflutter/blob/main/profilescreen2.dart

@@ -9,12 +9,13 @@ import 'splashscreen.dart';
 import 'signup.dart';
 import 'home_staff.dart';
 import 'feeding.dart';
+import 'feeding_admin.dart';
 import '../controller/suplaicontroller.dart';
 import 'dart:ffi';
 import 'laporan.dart';
 import 'login.dart';
 import '../controller/report_control.dart';
-
+import 'editProfile.dart';
 void main() => runApp(Homepage());
 
 class Homepage extends StatelessWidget {
@@ -22,7 +23,13 @@ class Homepage extends StatelessWidget {
   //final tbh = Get.put(SuplaiController());
   final tbh = Get.put(SuplaiController(),permanent: true);
   final rc =Get.put(ReportSuplaiControl(),permanent: true);
-
+  final  List<String> data= [
+      "Edit Profile ",
+      "Logout ",
+      
+     ];
+            
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -90,21 +97,50 @@ class Homepage extends StatelessWidget {
                                               ]
                                               )),
 
-                                              
-          SizedBox(width:155 ,),      
-          Container(
-            width: 44,
-            height: 44,
-            child: GestureDetector(
-                        onTap: () { 
-                              log.logout();
-                          },
-                        child: const Icon(Icons.logout),
-                        //Image.asset('assets/images/settings_bg.png'),
+                                         
+          SizedBox(width:110 ,),     
+
+          DropdownButtonHideUnderline(
+          child:   DropdownButton(
+            icon: Icon(
+                  Icons.settings,
+                  color: black,
+                  size: 30,
+                ),
+                                   
+           onChanged: (value){
+          print(value);
+          if (value == "Logout"){
+            log.logout();
+          } else {
+            Get.to(() => editProfile()); 
+          }
+          },
+                                    
+          items: data.map((e) => DropdownMenuItem(
+         value : e,
+          child: Text(e),
+          )).toList(),
+           ),
+          ),
+        
+          // Container(
+            
+          //   width: 44,
+          //   height: 44,
+            
+          //   child:  
+          //   GestureDetector(
+          //               onTap: () { 
+                         
+          //                     log.logout();
+          //                 },
+          //               child: const Icon(Icons.logout),
+          //               //Image.asset('assets/images/settings_bg.png'),
                         
-                      ),
+          //             ),
              
-          ) ,                             
+          // ) ,                             
             ],
           ),
          ),
@@ -323,7 +359,7 @@ class Homepage extends StatelessWidget {
                                   height: 8,),
                         GestureDetector(
                         onTap: () { 
-                          Get.to(() => feeding()); 
+                          Get.to(() => feedingadmin()); 
                           },
                         child: Text("Beri makan",style: dashboard,)
                         
