@@ -11,6 +11,7 @@ import '../controller/report_control.dart';
 import '../CRUD/report_crud.dart';
 import 'suplai.dart';
 import '../CRUD/report_crud.dart';
+import '../parts/headerStaff.dart';
 
   final rc =Get.put(ReportSuplaiControl(),permanent: true);
 
@@ -66,60 +67,8 @@ class feeding extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-             Container(
-              width: 44,
-              height: 44,
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: darkGreen,
-              ),
-
-              child: CircleAvatar(
-                
-                    backgroundImage: AssetImage('assets/images/profile_bg.png'),
-                    
-                    )
-                        ),
-               Padding(
-                                          padding: EdgeInsets.only(left: 12,top: 6),
-                                          child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                   MainAxisAlignment.start,
-                                              children: [
-                                                   Text("Hai ${uc.user?.displayName}",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.left,
-                                                    style: Paragraph),
-                                                Padding(
-                                                    padding: EdgeInsets.only(top: 6, bottom: 6),
-                                                    child: Text("id 001",
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: regular_small)),
-                                              ]
-                                              )),
-
-                                             
-          SizedBox(width:155 ,),      
-        Container(
-            width: 44,
-            height: 44,
-            child: GestureDetector(
-                        onTap: () { 
-                          log.logout();
-                          },
-                        child: const Icon(Icons.logout),
-                        //Image.asset('assets/images/settings_bg.png'),
-                        
-                      ),
-             
-          ) ,                      
+            
+             HeaderStaff()                      
             ],
           ),
          ),

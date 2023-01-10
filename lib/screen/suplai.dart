@@ -1,3 +1,4 @@
+import 'package:fimos_fix/parts/header.dart';
 import 'package:flutter/material.dart';
 import '../styleguide/font_style.dart';
 import '../controller/suplai_control.dart';
@@ -9,6 +10,7 @@ import 'dart:ffi';
 import '../controller/globals.dart';
 import '../controller/report_control.dart';
 import '../CRUD/report_crud.dart';
+import '../parts/infocard.dart';
 
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
 void main() => runApp(suplai());
@@ -60,60 +62,7 @@ class suplai extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-             Container(
-              width: 44,
-              height: 44,
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: darkGreen,
-              ),
-
-              child: CircleAvatar(
-                
-                    backgroundImage: AssetImage('assets/images/profile_bg.png'),
-                    
-                    )
-                        ),
-               Padding(
-                                          padding: EdgeInsets.only(left: 12,top: 6),
-                                          child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                   MainAxisAlignment.start,
-                                              children: [
-                                                Text("Hai Ali",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.left,
-                                                    style: Paragraph),
-                                                Padding(
-                                                    padding: EdgeInsets.only(top: 6, bottom: 6),
-                                                    child: Text("id 001",
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: regular_small)),
-                                              ]
-                                              )),
-
-                                             
-          SizedBox(width:155 ,),      
-        Container(
-            width: 44,
-            height: 44,
-            child: GestureDetector(
-                        onTap: () { 
-                          log.logout();
-                          },
-                        child: const Icon(Icons.logout),
-                        //Image.asset('assets/images/settings_bg.png'),
-                        
-                      ),
-             
-          ) ,                      
+             Header(),                  
             ],
           ),
          ),
@@ -122,136 +71,7 @@ class suplai extends StatelessWidget {
         height: 35,
         ),       
 
-         Container(
-          width: 332,
-          height: 126,
-          
-
-          child: Row(
-            children: [
-              
-              Container(
-                width: 100,
-                height: 126,
-
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,),
-
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child:
-                    Image.asset('assets/images/grass_bg_remove.png'),
-                  ),
-                    
-
-                  SizedBox(
-                  height: 12,
-                  ),
-
-                    Text("Suplai Pakan        Hijaun",style: details_small,textAlign: TextAlign.center,),
-
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Obx (() => Text ("${sc.hijauan}kg",
-                    style: details,
-                    textAlign: TextAlign.center)),
-                    // Text("${sc.hijauan}kg",
-                    // style: details,
-                    // textAlign: TextAlign.center,)
-
-                  ],
-                ),
-              ),  
-
-                  SizedBox(
-                  width: 16,
-                  ),       
-
-              Container(
-                width: 100,
-                height: 126,
-
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child:
-                    Image.asset('assets/images/konsentrat_bg-removebg-preview.png'),
-                  ),
-
-                  SizedBox(
-                  height: 12,
-                  ),
-
-                    Text("Suplai Pakan Konsentrat",style: details_small,textAlign: TextAlign.center,),
-
-                    SizedBox(
-                      height: 8,
-                    ),
-
-                    Obx (() => Text ("${sc.counter}kg",
-                    style: details,
-                    textAlign: TextAlign.center)),
-                  ],
-                ),                
-              ),
-
-                  SizedBox(
-                  width: 16,
-                  ),       
-
-              Container(
-                width: 100,
-                height: 126,
-
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  
-                  Container(
-                    
-                    child:
-                    Image.asset('assets/images/kambing_bg-removebg-preview.png',height: 50, width: 50,),
-                  ),
-
-                  SizedBox(
-                  height: 12,
-                  ),
-
-                    Text("Pakan Yang Telah Terkonsumsi",style: details_small,
-                    textAlign: TextAlign.center,
-                    ),
-
-                    SizedBox(
-                      height: 8,
-                    ),
-
-                       Obx (() => Text ("${sc.used}kg",
-                    style: details,
-                    textAlign: TextAlign.center)),
-                  ],
-                ),               
-              ),
-
-            ],
-          ),
-         ),
+         infoCard(),
 
         SizedBox(
         height: 42,
@@ -325,55 +145,6 @@ class suplai extends StatelessWidget {
                 height: 16,
               ),
 
-              //  Container(
-                
-              //   child: Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Text("Tanggal Pakan Ditambahkan",style: label,),
-              //         SizedBox(
-              //           height: 8,
-              //         ),
-              //         SizedBox(
-              //     height: 40,
-              //     width: 315,
-              //           child: TextField(
-                  
-              //       controller: tanggalDatang,        
-              //       decoration: InputDecoration(
-              //        // prefixIcon:Icon(Icons.calendar_today),
-              //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
-                      
-              //           hintText: "21-08-2022",hintStyle:hint ,
-                        
-              //       ),
-                    
-              //     //    onTap: () async {
-              //     //     DateTime? pickedDate = await showDatePicker(
-              //     //       context: context, initialDate: DateTime.now(),
-              //     //       firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-              //     //       lastDate: DateTime(2101),
-              //     //     );
-
-              //     //     if(pickedDate != null ){
-              //     //     print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-              //     //     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate); 
-              //     //     print(formattedDate); //formatted date output using intl package =>  2021-03-16
-              //     //       //you can implement different kind of Date Format here according to your requirement
-              //     //     var _tanggalDatang = pickedDate;
-              //     //     //  setState(() {
-              //     //     //    tanggalDatang.text = formattedDate; //set output date to TextField value. 
-              //     //     // });
-              //     // }else{
-              //     //     print("Date is not selected");
-              //     // }
-              //     //    }
-              //     ),
-              //         )
-                      
-              //       ],
-              //     )
-              // ),
                
                
                SizedBox(
@@ -396,18 +167,7 @@ class suplai extends StatelessWidget {
                   onPressed: () async {
            
              int  kuantitasPakan = int.parse(kuantitas_pakan.text);
-             var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;
-             //sc.tambah(kuantitasPakan); 
-  
-            // final sp = kuantitasPakan.obs;
-                    
-            
-            
-            
-             
-              
-            //print(_tanggalDatang);
-              
+             var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;             
               final DateTime now = DateTime.now();
               final DateFormat formatter = DateFormat('dd-MM-yyyy HH:mm:ss');
               final String formatted = formatter.format(now);          
@@ -420,10 +180,6 @@ class suplai extends StatelessWidget {
               final String laporan = formatterL.format(nowL);
               DateTime tanggaltambahLaporan =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(laporan);
               var tgl  = tanggaltambahLaporan.toString();
-              
-              
-
-
               String z = jenisPakan.text;
               String pakan = z;
               String konsen = "1";
@@ -477,35 +233,7 @@ class suplai extends StatelessWidget {
             
             var zs = "Penambahan Suplai";
             nt.addreport(kuantitasPakan, jenis, zs, tanggaltambah, x);
-           //     var xz = xs + 1;
-              
-            //     var responseL = await addLaporan.addlaporan (
-            //     kuantitasL : kuantitasPakan,
-            //     jenis: jenis,
-            //     jenisLaporan : zs,
-            //     idLaporan : xz,
-            //     tanggalDatang: tanggaltambah,
-            //     idpakan: x ,
-            //     );
 
-            //       if (responseL.code != 200) {
-            //   showDialog(
-            //       context: context,
-            //       builder: (context) {
-            //         return AlertDialog(
-            //           content: Text(responseL.message.toString()),
-            //         );
-            //       });
-            // } else {
-            //   showDialog(
-            //       context: context,
-            //       builder: (context) {
-            //         return AlertDialog(
-            //           content: Text(responseL.message.toString()),
-            //         );
-            //       });
-                        
-            //       } 
                   }, 
                   
                   child:  Text('Tambah Suplai Pakan', style: button_t),
