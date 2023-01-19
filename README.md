@@ -1,3 +1,5 @@
+![flutter logo](https://user-images.githubusercontent.com/108647679/213457695-22475daf-1faa-48f5-b846-c6c214f63e6c.png)
+
 # Fimos
 
 Fimos adalah aplikasi monitoring yang akan membantu  peternak untuk memonitoring suplai pakan ternak secara tepat 
@@ -6,16 +8,24 @@ Fimos adalah aplikasi monitoring yang akan membantu  peternak untuk memonitoring
 Adapun hal yang perlu disiapkan untuk menjalankan aplikasi ini :
 - source code editor seperti VS Code
 
-## How to Use
-Step 1 :
+## Langkah Instalasi
+Step 1:
 Download atau clone repository ini dengan link dibawah ini 
 ```
 Link : https://github.com/AliDavianto/fimos_fix.git
 ```
 
+Step 2:
+Buka project root dan jalankan perintah berikut di konsol untuk mendapatkan dependensi yang diperlukan:
+```
+flutter pub get 
+```
+## Dependencies
+- Flutter sebagai framework
+- Firebase Sebagai Database dan Backend-as-a-Service (BaaS)
+
 ## Note dari Developer
 Aplikasi ini masih dalam development
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contributor
+Ali Achmad Davianto
