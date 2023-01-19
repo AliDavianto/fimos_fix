@@ -9,7 +9,9 @@ Adapun hal yang perlu disiapkan untuk menjalankan aplikasi ini :
 ## How to Use
 Step 1 :
 Download atau clone repository ini dengan link dibawah ini 
-https://github.com/AliDavianto/fimos_fix.git
+...
+Link : https://github.com/AliDavianto/fimos_fix.git
+...
 
 ## Note dari Developer
 Aplikasi ini masih dalam development
