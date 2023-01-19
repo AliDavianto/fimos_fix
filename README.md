@@ -7,8 +7,7 @@ Adapun hal yang perlu disiapkan untuk menjalankan aplikasi ini :
 - [source code editor seperti VS Code)
 - [Flutter)
 
-
-### Note dari Developer
+## Note dari Developer
 Aplikasi ini masih dalam development
 
 For help getting started with Flutter development, view the
