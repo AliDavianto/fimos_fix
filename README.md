@@ -4,8 +4,12 @@ Fimos adalah aplikasi monitoring yang akan membantu  peternak untuk memonitoring
 
 ## Pre-requisite
 Adapun hal yang perlu disiapkan untuk menjalankan aplikasi ini :
-- [source code editor seperti VS Code)
-- [Flutter)
+- source code editor seperti VS Code
+
+## How to Use
+Step 1 :
+Download atau clone repository ini dengan link dibawah ini 
+https://github.com/AliDavianto/fimos_fix.git
 
 ## Note dari Developer
 Aplikasi ini masih dalam development
