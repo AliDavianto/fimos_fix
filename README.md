@@ -1,6 +1,6 @@
-# fimos_fix
+# Fimos
 
-A new Flutter project.
+Fimos adalah aplikasi monitoring yang akan membantu  peternak untuk memonitoring suplai pakan ternak secara tepat 
 
 ## Getting Started
 
