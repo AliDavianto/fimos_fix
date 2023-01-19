@@ -1,4 +1,4 @@
-![flutter logo](https://user-images.githubusercontent.com/108647679/213457695-22475daf-1faa-48f5-b846-c6c214f63e6c.png)
+              ![flutter logo](https://user-images.githubusercontent.com/108647679/213457695-22475daf-1faa-48f5-b846-c6c214f63e6c.png)
 
 # Fimos
 
@@ -12,7 +12,7 @@ Adapun hal yang perlu disiapkan untuk menjalankan aplikasi ini :
 Step 1:
 Download atau clone repository ini dengan link dibawah ini 
 ```
-Link : https://github.com/AliDavianto/fimos_fix.git
+https://github.com/AliDavianto/fimos_fix.git
 ```
 
 Step 2:
