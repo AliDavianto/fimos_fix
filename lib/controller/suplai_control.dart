@@ -11,30 +11,13 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _Collection = _firestore.collection('suplai');
 
 
-class suplaicontrol  {
-
-//  void kontrol(x){
-//   int  kuantitasPakan = int.parse(x);
-//   final su = kuantitasPakan.obs;
-//   print(su);
-// }
-
-}
- 
-class convert {
-  void stringtoint(){
-  
-  }
-}
-
-
 class addsuplai {
    static Future<Response> addSuplai({
     required int kuantitas,
     required String jenis,
     required String idpakan,
     required DateTime tanggalDatang, 
-    //required DateTime tanggalExp, 
+
     
   }) async{
            
@@ -48,7 +31,6 @@ class addsuplai {
       "kuantitas_pakan": kuantitas,
       "jenis_pakan": jenis,
       "tgl_dtg" : tanggalDatang,
-      //"tgl_exp" : tanggalDatang,
       "id_pakan" : idpakan,
       
     };

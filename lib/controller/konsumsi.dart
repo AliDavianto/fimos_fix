@@ -18,7 +18,7 @@ class UseSuplai {
     required String jenis,
     required String idpakan,
     required DateTime tanggaldiGunakan, 
-    //required DateTime tanggalExp, 
+ 
     
   }) async{
            
@@ -32,7 +32,6 @@ class UseSuplai {
       "kuantitas_pakan": kuantitas,
       "jenis_pakan": jenis,
       "tanggaldiGunakan" : tanggaldiGunakan,
-      //"tgl_exp" : tanggalDatang,
       "id_pakan" : idpakan,
       
     };

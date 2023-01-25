@@ -54,7 +54,7 @@ home: Scaffold(
                     
                   ),
                   onPressed: () {
-                      Get.to(Signup());
+                      Get.to(() => Signup());
                   },
                   
                   child:  Text('Daftar', style: button_t),
@@ -77,7 +77,7 @@ home: Scaffold(
                     
                   ),
                   onPressed: () {
-                    Get.to(() => login());
+                   Get.to(() => login());
                   },
                   
                   child:  Text('Masuk', style: button_t),

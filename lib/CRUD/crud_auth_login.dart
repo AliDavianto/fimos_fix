@@ -38,22 +38,6 @@ class AuthController extends GetxController {
   } else if (e.code == 'wrong-password') {
     print('Wrong password provided for that user.');
   } 
-  
-  //  FirebaseAuth.instance
-  // .idTokenChanges()
-  // .listen((User? user) {
-  //   if (user == null) {
-  //     print('User is currently signed out!');
-  //   } else {
-  //     Get.to(() => home_staff()); 
-  //     print('User is signed in!');
-  //     print(AsyncSnapshot);
-  //   }
-    
-       
-   
-    
-  // });
 
 }
 
@@ -79,8 +63,7 @@ FirebaseAuth.instance
 }
 
 void signup(String email, String password, String displayName) async{
-  //final user = FirebaseAuth.instance.currentUser;
-  //await FirebaseAuth.instance.signOut();
+
    
 
   try {
@@ -121,17 +104,7 @@ class UserControl extends GetxController{
     
     // Name, email address, and profile photo URL
     final name = user?.displayName;
-    //usersekarang.value = name;
-    // final email = user?.email;
-    // final photoUrl = user?.photoURL;
 
-    // // Check if user's email is verified
-    // final emailVerified = user?.emailVerified;
-
-    // // The user's ID, unique to the Firebase project. Do NOT use this value to
-    // // authenticate with your backend server, if you have one. Use
-    // // User.getIdToken() instead.
-    // final uid = user?.uid;
 }
   }
  

@@ -140,7 +140,7 @@ class login extends StatelessWidget {
                   ),
                   onPressed: (){
                     
-                   if(_staff_email.text == 'ali'){
+                   if(_staff_email.text == 'admin'){
                     Get.to(() => Homepage()); 
                           
                    } else {
