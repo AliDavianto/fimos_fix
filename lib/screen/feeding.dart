@@ -12,7 +12,9 @@ import '../CRUD/report_crud.dart';
 import 'suplai.dart';
 import '../CRUD/report_crud.dart';
 import '../parts/headerStaff.dart';
-
+import '../widget/dropdownPakan.dart';
+import 'package:fimos_fix/parts/header.dart';
+import '../parts/infocard.dart';
   final rc =Get.put(ReportSuplaiControl(),permanent: true);
 
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
@@ -20,7 +22,7 @@ void main() => runApp(feeding());
 
 
 class feeding extends StatelessWidget {
-
+  final dropvalue = Get.put(DropdownValue());
   final nt= Get.put(addLaporan());
 
   final uc = Get.put(UserControl());
@@ -77,137 +79,7 @@ class feeding extends StatelessWidget {
         height: 35,
         ),       
 
-         Container(
-          width: 332,
-          height: 126,
-          
-
-          child: Row(
-            children: [
-              
-              Container(
-                width: 100,
-                height: 126,
-
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,),
-
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child:
-                    Image.asset('assets/images/grass_bg_remove.png'),
-                  ),
-                    
-
-                  SizedBox(
-                  height: 12,
-                  ),
-
-                    Text("Suplai Pakan        Hijaun",style: details_small,textAlign: TextAlign.center,),
-
-                    SizedBox(
-                      height: 8,
-                    ),
-
-                  Obx (() => Text ("${sc.hijauan}kg",
-                    style: details,
-                    textAlign: TextAlign.center)),
-                    // Text("${sc.hijauan}kg",
-                    // style: details,
-                    // textAlign: TextAlign.center,)
-
-                  ],
-                ),
-              ),  
-
-                  SizedBox(
-                  width: 16,
-                  ),       
-
-              Container(
-                width: 100,
-                height: 126,
-
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child:
-                    Image.asset('assets/images/konsentrat_bg-removebg-preview.png'),
-                  ),
-
-                  SizedBox(
-                  height: 12,
-                  ),
-
-                    Text("Suplai Pakan Konsentrat",style: details_small,textAlign: TextAlign.center,),
-
-                    SizedBox(
-                      height: 8,
-                    ),
-
-                    Obx (() => Text ("${sc.counter}kg",
-                    style: details,
-                    textAlign: TextAlign.center)),
-                  ],
-                ),                
-              ),
-
-                  SizedBox(
-                  width: 16,
-                  ),       
-
-              Container(
-                width: 100,
-                height: 126,
-
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.white,),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  
-                  Container(
-                    
-                    child:
-                    Image.asset('assets/images/kambing_bg-removebg-preview.png',height: 50, width: 50,),
-                  ),
-
-                  SizedBox(
-                  height: 12,
-                  ),
-
-                    Text("Pakan Yang Telah Terkonsumsi",style: details_small,
-                    textAlign: TextAlign.center,
-                    ),
-
-                    SizedBox(
-                      height: 8,
-                    ),
-
-                   Obx (() => Text ("${sc.used}kg",
-                    style: details,
-                    textAlign: TextAlign.center)),
-                  ],
-                ),               
-              ),
-
-            ],
-          ),
-         ),
+         infoCard(),
 
         SizedBox(
         height: 42,
@@ -229,15 +101,20 @@ class feeding extends StatelessWidget {
                       SizedBox(
                   height: 40,
                   width: 315,
-                        child: TextField(
+                        child: Obx (() =>TextField(
+                    readOnly: true,     
                     keyboardType: TextInputType.number,      
-                    controller: jenisPakan , 
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
-                      hintText: "contoh : 1 untuk Konsentrat,2 untuk Hijauan",hintStyle:hint ,
+                    controller: jenisPakan ,                     
+                    decoration:  InputDecoration(
+                      
+                      border:   OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      hintText: dropvalue.a.string ,
+                      hintStyle: Paragraph,
+                      suffixIcon: dropvalue.DropdownButtonsPakan(),
                       
                     ),
                   ),
+                        ) 
                       )
                       
                     ],
@@ -328,14 +205,14 @@ class feeding extends StatelessWidget {
               DateTime tanggaltambahLaporan =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(laporan);
               var tgl  = tanggaltambahLaporan.toString();
               
-              String z = jenisPakan.text;
+              String z = dropvalue.a.string;
               String pakan = z;
-              String konsen = "1";
+              String konsen = "Konsentrart";
               String _jenispakan;
-            String _idpakan;
+            String _idpakan;   
                 if (pakan == konsen) { 
                   _idpakan = "1";
-                  _jenispakan = "konsentrart";
+                  _jenispakan = "Konsentrart";
                   
                 } else{
                   _idpakan = "2";
@@ -348,7 +225,7 @@ class feeding extends StatelessWidget {
             var jenis = _jenispakan;
             var zx = rc.id_laporan.value.obs;  
             rc.reportPemakaian(kuantitasPakanR,x,tgl,zx);
-
+            //sc.suplaikontrol(sc.konsentrart.value, sc.hijauan.value, sc.used.value);
             var response = await UseSuplai.useSuplai (
                 kuantitas : kuantitasPakan ,
                 jenis: jenis,

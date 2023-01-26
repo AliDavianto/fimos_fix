@@ -186,26 +186,7 @@ class login extends StatelessWidget {
                     )),
 
                     SizedBox(height: 20,),
-                    SizedBox(
                 
-                  width: 315, // <-- Your width
-                  height: 36, // <-- Your height
-                  child: TextButton(
-                      
-                    style: TextButton.styleFrom(
-                    foregroundColor: Color(0xFFFFFFFF),
-                    backgroundColor: Color(0xFF307A59),
-                    textStyle: const TextStyle(fontSize: 20),
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
-                    
-                  ),
-                  onPressed: () {
-                                        Authc.logout();
-                  },
-                  
-                  child:  Text('Logout', style: button_t),
-                    ),
-                ),
             
             ],
             ),
