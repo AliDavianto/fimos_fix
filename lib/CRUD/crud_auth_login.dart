@@ -24,7 +24,17 @@ class AuthController extends GetxController {
 
   
   void loginstaff(String email, String password) async {
-          
+  final user = FirebaseAuth.instance.currentUser;
+  FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User ini masuk !');
+      Get.to(() => home_staff()); 
+    }
+  });
  try { 
   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
     
@@ -47,19 +57,7 @@ class AuthController extends GetxController {
 void logout() async{
   final user = FirebaseAuth.instance.currentUser;
   await FirebaseAuth.instance.signOut();
-   Get.to(() => login());
-
-FirebaseAuth.instance
-  .authStateChanges()
-  .listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      print('User ini masuk !');
-      Get.to(() => home_staff()); 
-    }
-  });
-  
+   Get.to(() => login ());  
 }
 
 void signup(String email, String password, String displayName) async{

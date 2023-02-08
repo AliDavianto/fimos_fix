@@ -15,7 +15,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'suplai.dart';
-
+import '../parts/headerStaff.dart';
 
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
 void main() => runApp(editProfile());
@@ -69,61 +69,7 @@ class editProfile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-             Container(
-              width: 44,
-              height: 44,
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: darkGreen,
-              ),
-
-              child: CircleAvatar(
-                
-                    backgroundImage: NetworkImage("${uc.user?.photoURL}")
-                    //AssetImage('assets/images/profile_bg.png'),
-                    
-                    )
-                        ),
-               Padding(
-                                          padding: EdgeInsets.only(left: 12,top: 6),
-                                          child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                   MainAxisAlignment.start,
-                                              children: [
-                                                Text("Hai ${uc.user?.displayName}",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.left,
-                                                    style: Paragraph),
-                                                Padding(
-                                                    padding: EdgeInsets.only(top: 6, bottom: 6),
-                                                    child: Text("id 001",
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: regular_small)),
-                                              ]
-                                              )),
-
-                                             
-          SizedBox(width:155 ,),      
-        Container(
-            width: 44,
-            height: 44,
-            child: GestureDetector(
-                        onTap: () { 
-                          log.logout();
-                          },
-                        child: const Icon(Icons.logout),
-                        //Image.asset('assets/images/settings_bg.png'),
-                        
-                      ),
-             
-          ) ,                      
+                      HeaderStaff(),         
             ],
           ),
          ),
@@ -142,8 +88,7 @@ class editProfile extends StatelessWidget {
 
               child: GestureDetector(
           onTap: () async {
-            // Execute some code when the image is tapped
-            //Get.to(() => suplai());
+            
             final results = await FilePicker.platform.pickFiles(
               allowMultiple: false,
               type: FileType.custom,
@@ -164,7 +109,7 @@ class editProfile extends StatelessWidget {
             storage.uploadFile(path, filename).then((value) => print('berhasil'));
           },
           child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/profile_bg.png'),
+                   backgroundImage: NetworkImage("${uc.user?.photoURL}")
                     ),
               
               

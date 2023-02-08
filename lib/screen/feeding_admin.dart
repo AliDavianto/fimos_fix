@@ -11,7 +11,7 @@ import '../controller/report_control.dart';
 import '../CRUD/report_crud.dart';
 import 'package:fimos_fix/parts/header.dart';
 import '../parts/infocard.dart';
-
+import '../widget/dropdownPakan.dart';
   final rc =Get.put(ReportSuplaiControl(),permanent: true);
 
 //jika error ganti Get.put(SuplaiController()); ke Get.put(suplaicontrol());
@@ -20,7 +20,7 @@ void main() => runApp(feedingadmin());
 
 class feedingadmin extends StatelessWidget {
 
-
+  final dropvalue = Get.put(DropdownValue());
   final nt= Get.put(addLaporan());
   final kuantitas_pakan = TextEditingController();
   final jenisPakan = TextEditingController();
@@ -30,10 +30,9 @@ class feedingadmin extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final log = Get.put(AuthController());
   final sc = Get.put(SuplaiController(),permanent: true);
- 
+  final vc = Get.put(AddSuplaiControl());
+  final lf = Get.put(AddLaporanControl());
 
-
- 
   @override
 
 
@@ -95,15 +94,20 @@ class feedingadmin extends StatelessWidget {
                       SizedBox(
                   height: 40,
                   width: 315,
-                        child: TextField(
+                        child:  Obx (() =>TextField(
+                    readOnly: true,     
                     keyboardType: TextInputType.number,      
-                    controller: jenisPakan , 
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
-                      hintText: "contoh : 1 untuk Konsentrat,2 untuk Hijauan",hintStyle:hint ,
+                    controller: jenisPakan ,                     
+                    decoration:  InputDecoration(
+                      
+                      border:   OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),),
+                      hintText: dropvalue.a.string ,
+                      hintStyle: Paragraph,
+                      suffixIcon: dropvalue.DropdownButtonsPakan(),
                       
                     ),
                   ),
+                        ) 
                       )
                       
                     ],
@@ -171,14 +175,7 @@ class feedingadmin extends StatelessWidget {
              int  kuantitasPakan = int.parse(kuantitas_pakan.text);
              var kuantitasPakanR =  int.parse(kuantitas_pakan.text) ;  
              //sc.tambah(kuantitasPakan); 
-  
             // final sp = kuantitasPakan.obs;
-                    
-            
-            
-            
-             
-              
             //print(_tanggalDatang);
               
               final DateTime now = DateTime.now();
@@ -194,31 +191,34 @@ class feedingadmin extends StatelessWidget {
               DateTime tanggaltambahLaporan =  DateFormat("dd-MM-yyyy HH:mm:ss").parse(laporan);
               var tgl  = tanggaltambahLaporan.toString();
               
-              String z = jenisPakan.text;
+              String z = dropvalue.a.string;
               String pakan = z;
-              String konsen = "1";
+              String konsen = "Konsentrart";
+              
               String _jenispakan;
-            String _idpakan;
+            String _idpakan;   
                 if (pakan == konsen) { 
                   _idpakan = "1";
-                  _jenispakan = "konsentrart";
+                  _jenispakan = "Konsentrart";
                   
                 } else{
                   _idpakan = "2";
                   
                   _jenispakan = "Hijauan";
                 }
-            
+             print("yang dipilih " + z);
             var x = _idpakan;
             sc.decrement(kuantitasPakan,x);
             var jenis = _jenispakan;
              var zx = rc.id_laporan.value.obs;  
+            
             rc.reportPemakaian(kuantitasPakanR,x,tgl,zx);
+            lf.addlaporansuplai(x, jenis, kuantitasPakan.toInt(),tgl);
 
+            //vc.addhijauan(sc.konsentrart.toInt(), sc.hijauan.toInt(), sc.used.toInt()); 
             var response = await UseSuplai.useSuplai (
                 kuantitas : kuantitasPakan ,
                 jenis: jenis,
-                //tanggalExp: tanggalExp.text,
                 tanggaldiGunakan: tanggaltambah,
                 idpakan: x ,
                 

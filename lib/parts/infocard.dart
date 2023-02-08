@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import '../styleguide/font_style.dart';
 import 'package:get/get.dart';
 import '../controller/suplaicontroller.dart';
+import '../controller/cardController.dart';
+
 
 class infoCard extends StatelessWidget {
    infoCard({super.key});
   final tbh = Get.put(SuplaiController(),permanent: true);
-
+  final cc =  Get.put(Cardvar());
   @override
   Widget build(BuildContext context) {
+    cc.listenToData();
     return Container(child: Row(
       children: [
            Container(
@@ -28,7 +31,7 @@ class infoCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 color: Colors.white,),
 
-                child: Column(
+                child:   Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                   
@@ -49,12 +52,9 @@ class infoCard extends StatelessWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    Obx (() => Text ("${tbh.hijauan}kg",
+                    Obx (() => Text (cc.hijauan != null ? "${cc.hijauan}kg" : "Loading...",
                     style: details,
                     textAlign: TextAlign.center)),
-                    // Text("${tbh.hijauan}kg",
-                    // style: details,
-                    // textAlign: TextAlign.center,)
 
                   ],
                 ),
@@ -71,7 +71,7 @@ class infoCard extends StatelessWidget {
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: Colors.white,),
-                child: Column(
+                child:    Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                   
@@ -92,7 +92,7 @@ class infoCard extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Obx (() => Text ("${tbh.counter}kg",
+                    Obx (() => Text (cc.konsentrat != null ? "${cc.konsentrat}kg" : "Loading...",
                     style: details,
                     textAlign: TextAlign.center)),
                   ],
@@ -110,7 +110,7 @@ class infoCard extends StatelessWidget {
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: Colors.white,),
-                child: Column(
+                child:   Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                   
@@ -132,7 +132,7 @@ class infoCard extends StatelessWidget {
                       height: 8,
                     ),
 
-                    Obx (() => Text ("${tbh.used}kg",
+                    Obx (() => Text (cc.used != null ? "${cc.used}kg" : "Loading...",
                     style: details,
                     textAlign: TextAlign.center)),
                   ],

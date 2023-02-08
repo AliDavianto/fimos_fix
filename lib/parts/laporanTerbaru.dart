@@ -2,14 +2,18 @@
 import '../styleguide/font_style.dart';
 import 'package:get/get.dart';
 import '../controller/report_control.dart';
+import '../controller/laporanTerbaruController.dart';
 
 class LaporanTerbaru extends StatelessWidget {
    LaporanTerbaru({super.key});
 
   final rc =Get.put(ReportSuplaiControl(),permanent: true);
+  final lv =  Get.put(LaporanVar());
 
   @override
   Widget build(BuildContext context) {
+    lv.listenToData();
+
     return Container(child: Row(
       children: [
            Container(
@@ -56,17 +60,29 @@ class LaporanTerbaru extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Obx (() => Text ("Id Laporan : ${rc.id_laporan}",style: Paragraph,)), 
+                                  Obx (() => Text (lv.id_laporan != null ? "ID Laporan  : ${lv.id_laporan}" : "Loading...",
+                                  style: Paragraph,
+                                  textAlign: TextAlign.center)),
                                    SizedBox(height:12 ,),
-                                  Obx (() => Text ("Tanggal Laporan : ${rc.tgl_laporan.value}",style: Paragraph,)), 
+                                  Obx (() => Text (lv.tgl_laporan != null ? "Tanggal Laporan : ${lv.tgl_laporan}" : "Loading...",
+                                  style: Paragraph,
+                                  textAlign: TextAlign.center)),
                                    SizedBox(height:12 ,),
-                                  Obx (() => Text ("Jenis Laporan : ${rc.jenis_laporan.value}",style: Paragraph,)),                                
+                                  Obx (() => Text (lv.jenis_laporan != null ? "Jenis Laporan : ${lv.jenis_laporan}" : "Loading...",
+                                  style: Paragraph,
+                                  textAlign: TextAlign.center)),                            
                                   SizedBox(height:12 ,),
-                                  Obx (() => Text ("Jenis Pakan : ${rc.jenis.value}",style: Paragraph,)),                                
+                                  Obx (() => Text (lv.jenisPakan != null ? "Jenis Pakan : ${lv.jenisPakan}" : "Loading...",
+                                  style: Paragraph,
+                                  textAlign: TextAlign.center)),                              
                                   SizedBox(height:12 ,),
-                                  Obx (() => Text ("Kuantitas Pakan : ${rc.kuantitas.value}",style: Paragraph,)),        
+                                  Obx (() => Text (lv.kuantitas != null ? "Kuantitas Pakan : ${lv.kuantitas}" : "Loading...",
+                                  style: Paragraph,
+                                  textAlign: TextAlign.center)),   
                                   SizedBox(height:12 ,),
-                                  Obx (() => Text ("ID Pakan : ${rc.id.value}",style: Paragraph,)),        
+                                  Obx (() => Text (lv.idpakan != null ? "ID Pakan : ${lv.idpakan}" : "Loading...",
+                                  style: Paragraph,
+                                  textAlign: TextAlign.center)),        
 
                                 ],
                               ),

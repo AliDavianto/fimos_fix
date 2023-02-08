@@ -30,11 +30,11 @@ class Header extends StatelessWidget {
                child: Column(
                mainAxisSize: MainAxisSize.min,
                crossAxisAlignment:
-               CrossAxisAlignment.start,
+               CrossAxisAlignment.start,  
                mainAxisAlignment:
                MainAxisAlignment.start,
                children: [
-              Text("Hai Ali",
+              Text("Admin",
               overflow:
               TextOverflow.ellipsis,
               textAlign: TextAlign.left,
@@ -57,6 +57,7 @@ class Header extends StatelessWidget {
 
 
       ],
-    ),);
+    ),
+    );
   }
 }

@@ -1,22 +1,17 @@
 import 'dart:ui';
-import 'suplai.dart';
-import 'package:flutter/material.dart';
-import '../main.dart';
-import '../styleguide/font_style.dart';
-import 'splashscreen.dart';
-import 'signup.dart';
-import 'home_staff.dart';
-import 'feeding.dart';
+import 'package:fimos_fix/parts/reportStream.dart';
 import 'package:get/get.dart';
 import '../CRUD/crud_auth_login.dart';
-import 'package:get/get.dart';
-import 'package:fimos_fix/parts/header.dart';
-import '../parts/laporanParts.dart';
+import 'suplai.dart';
+import 'package:flutter/material.dart';
+import 'dart:ffi';
+import '../parts/header.dart';
+import '../parts/infocard.dart';
+import '../parts/dashboard.dart';
+import '../parts/laporanTerbaru.dart';
 void main() => runApp(report());
 
 class report extends StatelessWidget {
-    final log = Get.put(AuthController());
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,6 +23,8 @@ class report extends StatelessWidget {
         body : SingleChildScrollView(
            
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
                 SizedBox(
                 height: 12,
@@ -38,26 +35,34 @@ class report extends StatelessWidget {
           margin: const EdgeInsets.only(left: 20.0, right: 20.0),
           width: 324,
           height: 44,
-          //color for header
-          //color: darkGreen,
           child: Row(crossAxisAlignment: 
            CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
 
-                     Header()                   
+             Header(),
+             
+                          
             ],
           ),
          ),
 
-        SizedBox(
-        height: 35,
-        ),       
+        // SizedBox(
+        // height: 15,
+        // ),
+    SingleChildScrollView(
+      child:  SizedBox(
+    height: MediaQuery.of(context).size.height,
+    child: reportStreaming(),    
+      )
+      ),
+     
+          
 
-      LaporanParts(),
-      
-             
- //akhir widget            
+         
+
+        
+         
             ],
           )
         )));

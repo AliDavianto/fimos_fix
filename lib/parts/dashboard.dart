@@ -57,8 +57,9 @@ class Dashboard extends StatelessWidget {
                                     ),
                                   SizedBox(
                                   height: 8,),
-                        GestureDetector(
+                        InkWell(
                         onTap: () { 
+                          
                         Get.to(() => suplai()); 
 
                           },
