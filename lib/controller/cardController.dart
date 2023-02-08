@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class CardDataController extends GetxController{
+class CardDataController extends GetxController{  
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   StreamController<QuerySnapshot<Object?>> _dataController = StreamController<QuerySnapshot<Object?>>.broadcast();
   Stream<QuerySnapshot<Object?>> get dataStream => _dataController.stream;

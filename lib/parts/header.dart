@@ -30,7 +30,7 @@ class Header extends StatelessWidget {
                child: Column(
                mainAxisSize: MainAxisSize.min,
                crossAxisAlignment:
-               CrossAxisAlignment.start,
+               CrossAxisAlignment.start,  
                mainAxisAlignment:
                MainAxisAlignment.start,
                children: [
@@ -57,6 +57,7 @@ class Header extends StatelessWidget {
 
 
       ],
-    ),);
+    ),
+    );
   }
 }

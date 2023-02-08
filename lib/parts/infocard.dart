@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../controller/suplaicontroller.dart';
 import '../controller/cardController.dart';
 
+
 class infoCard extends StatelessWidget {
    infoCard({super.key});
   final tbh = Get.put(SuplaiController(),permanent: true);
@@ -11,7 +12,6 @@ class infoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     cc.listenToData();
-    
     return Container(child: Row(
       children: [
            Container(
@@ -52,9 +52,9 @@ class infoCard extends StatelessWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    // // Obx (() => Text (cc.hijauan != null ? "${cc.hijauan}kg" : "Loading...",
-                    // // style: details,
-                    // // textAlign: TextAlign.center)),
+                    Obx (() => Text (cc.hijauan != null ? "${cc.hijauan}kg" : "Loading...",
+                    style: details,
+                    textAlign: TextAlign.center)),
 
                   ],
                 ),
@@ -92,9 +92,9 @@ class infoCard extends StatelessWidget {
                       height: 8,
                     ),
 
-                    // Obx (() => Text (cc.konsentrat != null ? "${cc.konsentrat}kg" : "Loading...",
-                    // style: details,
-                    // textAlign: TextAlign.center)),
+                    Obx (() => Text (cc.konsentrat != null ? "${cc.konsentrat}kg" : "Loading...",
+                    style: details,
+                    textAlign: TextAlign.center)),
                   ],
                 ),                
               ),
@@ -132,9 +132,9 @@ class infoCard extends StatelessWidget {
                       height: 8,
                     ),
 
-                    // Obx (() => Text (cc.used != null ? "${cc.used}kg" : "Loading...",
-                    // style: details,
-                    // textAlign: TextAlign.center)),
+                    Obx (() => Text (cc.used != null ? "${cc.used}kg" : "Loading...",
+                    style: details,
+                    textAlign: TextAlign.center)),
                   ],
                 ),               
               ),

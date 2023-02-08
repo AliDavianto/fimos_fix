@@ -8,15 +8,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class reportController extends GetxController {
-FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-Future<QuerySnapshot<Object?>> getData() async {
-  CollectionReference report = firestore.collection('laporan');
-  return report.get();
-}
+  Future<QuerySnapshot> getData() async {
+    CollectionReference report = firestore.collection('laporan');
+    return report.get();
+  }
 
-Stream<QuerySnapshot<Object?>>  streamdata(){
-  CollectionReference report = firestore.collection('laporan');
-  return report.snapshots();
-}
+  Stream<QuerySnapshot> streamdata(){
+    CollectionReference report = firestore.collection('laporan');
+    return report.snapshots();
+  }
 }

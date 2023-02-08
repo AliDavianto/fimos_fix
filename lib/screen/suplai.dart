@@ -34,12 +34,14 @@
     final rc =Get.put(ReportSuplaiControl(),permanent: true);
     final nt= Get.put(addLaporan());
     final vc = Get.put(AddSuplaiControl());
+    final lf = Get.put(AddLaporanControl());
     // var xs = 0;
   
     @override
 
 
     Widget build(BuildContext context) {
+      
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         
@@ -206,13 +208,16 @@
                     
                     _jenispakan = "Hijauan";
                   }
-              var x = _idpakan;
+              var  x= _idpakan;
               var zx = rc.id_laporan.value.obs;  
               var jenis = _jenispakan;
-              sc.increment(kuantitasPakan,x);
-              rc.reportSuplai(kuantitasPakanR,x,tgl,zx);
-             // vc.addcontrolsuplai(sc.konsentrart.value, sc.hijauan.value, sc.used.value);
-              sc.suplaikontrol(sc.konsentrart.value,  sc.hijauan.value,  sc.used.value);
+              sc.increment(kuantitasPakan.toInt(),x);
+              //rc.reportSuplai(kuantitasPakanR,x,tgl,zx);
+              lf.addlaporansuplai(x, jenis, kuantitasPakan.toInt(),tgl);
+              // vc.addhijauan( sc.hijauan.toInt()); 
+              // vc.addkonsentrat( sc.konsentrart.toInt()); ]
+              //vc.increment(kuantitasPakan.toInt(), x);
+              //sc.suplaikontrol(sc.konsentrart.value,  sc.hijauan.value,  sc.used.value);
               var response = await addsuplai.addSuplai (
                   kuantitas : kuantitasPakan ,
                   jenis: jenis,

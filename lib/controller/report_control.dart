@@ -5,13 +5,50 @@ import '../controller/suplai_control.dart';
 import '../controller/suplaicontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../controller/laporanTerbaruController.dart';
+class AddLaporanControl extends GetxController{
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference control = FirebaseFirestore.instance.collection('laporanControl');
+  final lv =Get.put(LaporanVar());
 
-FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  AddLaporan(){
+    lv.listenToData();
+  }
 
+  Future<void> addlaporansuplai(a,b,c,d) {
+    var kuantitasvalue =   lv.kuantitas.toInt();  
+    var idLaporanvalue = lv.id_laporan.toInt(); 
+    return control    
+      .doc('prime')
+      .update({
+        'id_laporan' : idLaporanvalue + 1,
+        'id_pakan' : a,
+        'jenis_laporan' : "Pemakaian Pakan",
+        'jenis_pakan' : b,
+        'kuantitas_pakan' : kuantitasvalue + c,
+        'tgl_laporan' : d,
+        })
+      .then((value) => print("Laporan Updated"))  
+      .catchError((error) => print("Failed to update Laporan: $error"));    
+  }
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _Collection = _firestore.collection('laporan');
-
+    Future<void> addlaporanfeeding(a,b,c,d) {
+    var kuantitasvalue =   lv.kuantitas.toInt();  
+    var idLaporanvalue = lv.id_laporan.toInt(); 
+    return control    
+      .doc('prime')
+      .update({
+        'id_laporan' : idLaporanvalue + 1,
+        'id_pakan' : a,
+        'jenis_laporan' : "Penambahan Pakan",
+        'jenis_pakan' : b,
+        'kuantitas_pakan' : kuantitasvalue + c,
+        'tgl_laporan' : d,
+        })
+      .then((value) => print("Laporan Updated"))  
+      .catchError((error) => print("Failed to update Laporan: $error"));    
+  }
+}
 class ReportSuplaiControl extends GetxController{
 //var buat laporan homepage admin
   var jenis =  "null".obs;
@@ -112,7 +149,7 @@ class ReportSuplaiControl extends GetxController{
         tgl_laporan1.value = z;
         id_laporan1 ; 
         id_laporanR1 =s + 1;
-             
+              
 
     } else {
          var  kuantitasPakan = x.toString();

@@ -12,56 +12,107 @@ class AddSuplaiControl extends GetxController{
   AddSuplaiControl(){
     ac.listenToData();
   }
-  Future<void> addcontrolsuplai(a,b,c) {
-     print("berhasil");
-    var konsentratintValue =   ac.konsentrat.toInt(); 
-    var hijauanintValue =   ac.hijauan.toInt(); 
-    var usedintValue =   ac.used.toInt(); 
 
-    // var aValue =   a.value(); 
-    // var bValue =   b.value(); 
-    // var cValue =   c.value(); 
+  Future<void> addhijauan(b) {
+    var hijauanintValue =   ac.hijauan.toInt();  
+    return control    
+      .doc('Prime')
+      .update({
+        'Hijauan' : hijauanintValue + b,
+        })
+      .then((value) => print("Hijauan Updated"))  
+      .catchError((error) => print("Failed to update Control: $error"));    
+  }
+
+    Future<void> addkonsentrat(a) {
+    var konsentratintValue =   ac.konsentrat.toInt(); 
     return control    
       .doc('Prime')
       .update({
         'Konsentrat':  konsentratintValue + a,
-        'Hijauan' : hijauanintValue + b,
+        })
+      .then((value) => print("Konsentrat Updated"))  
+      .catchError((error) => print("Failed to update Control: $error"));    
+  }
+
+  Future<void> usedkonsentrat(c) {
+    var konsentratintValue =   ac.konsentrat.toInt(); 
+    var usedintValue =   ac.used.toInt(); 
+    return control    
+      .doc('Prime')
+      .update({
+        'Konsentrat':  konsentratintValue - c,
         'Used' : usedintValue + c,
         })
-      .then((value) => print("Control Updated"))  
+      .then((value) => print("Used Updated"))  
       .catchError((error) => print("Failed to update Control: $error"));
-      
   }
+
+  
+  Future<void> usedhijauan(c) {
+    var hijauanintValue =    ac.hijauan.toInt(); 
+    var usedintValue =   ac.used.toInt(); 
+    print(c);
+    return control    
+      .doc('Prime')
+      .update({
+        'Hijauan':  hijauanintValue - c,
+        'Used' : usedintValue + c,
+        })
+      .then((value) => print("Used Updated"))  
+      .catchError((error) => print("Failed to update Control: $error"));
+  }
+
+  //   Future<void> addused(c) {
+  //   var hijauanintValue =   ac.hijauan.toInt();  
+  //   var konsentratintValue =   ac.konsentrat.toInt(); 
+  //   var usedintValue =   ac.used.toInt(); 
+  //   return control    
+  //     .doc('Prime')
+  //     .update({
+  //       'Konsentrat':  konsentratintValue - c,
+  //       'Used' : usedintValue + c,
+  //       })
+  //     .then((value) => print("Used Updated"))  
+  //     .catchError((error) => print("Failed to update Control: $error"));
+  // }
 }
 
 
 class SuplaiController extends GetxController{
   final cc =  Get.put(AddSuplaiControl());
    final ac =Get.put(Cardvar());
-  var konsentrart =  0.obs;
-  var hijauan = 0.obs;
-  var used = 0.obs;
+  // num konsentrart =  0;
+  // num hijauan = 0;
+  // num used = 0;
 
-  void suplaikontrol(konsentrart,hijauan,used){
+  
+//  void suplaikontrol(int konsentrart,int hijauan,int used){
 
-    cc.addcontrolsuplai(konsentrart, hijauan, used);
+//     cc.addcontrolsuplai(konsentrart, hijauan, used);
    
-  }
-  void increment(x,y) {
-    if (y == "1"){
-        konsentrart + x;
-    } else {
-        hijauan + x;      
+//   }
+ void increment(num x, String y) {
+        if (y == "1") {
+        //konsentrart += x;
+        cc.addkonsentrat(x);
+        } else {
+        //hijauan += x;
+         cc.addhijauan(x);
     }
-  }
+    }
   void decrement(x,y) {
     if (y == "1"){
-        konsentrart - x;
+      
+      print("id adalah " +y);
+      cc.usedkonsentrat(x);
+        //konsentrart -= x;
     } else {
-        hijauan - x;
+      print(x);
+      cc.usedhijauan(x);
     }
     
-    used + x;
+
   }
  }
 

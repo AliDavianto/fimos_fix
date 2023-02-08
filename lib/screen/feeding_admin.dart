@@ -30,7 +30,9 @@ class feedingadmin extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final log = Get.put(AuthController());
   final sc = Get.put(SuplaiController(),permanent: true);
- 
+  final vc = Get.put(AddSuplaiControl());
+  final lf = Get.put(AddLaporanControl());
+
   @override
 
 
@@ -192,6 +194,7 @@ class feedingadmin extends StatelessWidget {
               String z = dropvalue.a.string;
               String pakan = z;
               String konsen = "Konsentrart";
+              
               String _jenispakan;
             String _idpakan;   
                 if (pakan == konsen) { 
@@ -203,17 +206,19 @@ class feedingadmin extends StatelessWidget {
                   
                   _jenispakan = "Hijauan";
                 }
-            
+             print("yang dipilih " + z);
             var x = _idpakan;
             sc.decrement(kuantitasPakan,x);
             var jenis = _jenispakan;
              var zx = rc.id_laporan.value.obs;  
+            
             rc.reportPemakaian(kuantitasPakanR,x,tgl,zx);
-            //sc.suplaikontrol(sc.konsentrart.value, sc.hijauan.value, sc.used.value);
+            lf.addlaporansuplai(x, jenis, kuantitasPakan.toInt(),tgl);
+
+            //vc.addhijauan(sc.konsentrart.toInt(), sc.hijauan.toInt(), sc.used.toInt()); 
             var response = await UseSuplai.useSuplai (
                 kuantitas : kuantitasPakan ,
                 jenis: jenis,
-                //tanggalExp: tanggalExp.text,
                 tanggaldiGunakan: tanggaltambah,
                 idpakan: x ,
                 
